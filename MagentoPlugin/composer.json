@@ -1,0 +1,24 @@
+{
+  "name": "koality/magentoplugin",
+  "description": "This plugin is used to monitor the business metrics of the shop with koality.io.",
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "license": "OSL-3.0",
+  "authors": [
+    {
+      "name": "Team CustomGento",
+      "email": "info@customgento.com"
+    }
+  ],
+  "require": {
+      "php": "~7.3.0||~7.4.0"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Koality\\MagentoPlugin\\": ""
+    }
+  }
+}

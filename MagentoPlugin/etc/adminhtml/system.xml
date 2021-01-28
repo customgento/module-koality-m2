@@ -1,0 +1,64 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="koality_module_magento" type="text" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Koality</label>
+            <tab>service</tab>
+            <resource>Magento_Webapi::config_webapi</resource>
+            <group id="koality_apikey" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>koality.io API key</label>
+                <field id="apikey" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Your secret koality.io API key</label>
+                    <comment>The API key must be added to the koality.io configuration in the koality.io
+                        backend.
+                    </comment>
+                </field>
+            </group>
+            <group id="rush_hour" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Rush hour</label>
+                <field id="rushHourBegin" translate="label" type="time" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>When does your rush hour begin?</label>
+                </field>
+                <field id="rushHourEnd" translate="label" type="time" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>When does your rush hour end?</label>
+                </field>
+                <field id="ordersPerHourRushHour" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>How many orders do you at least expect every hour in the rush hour?</label>
+                </field>
+                <field id="includeWeekends" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Does the rush hour also happen on the weekend?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="opening_hours" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Opening hours</label>
+                <field id="ordersPerHourNormal" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>How many orders do you at least expect every hour outside the rush hour?</label>
+                </field>
+            </group>
+            <group id="open_carts" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Open carts</label>
+                <field id="openCarts" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>How many open carts may exist?</label>
+                </field>
+            </group>
+            <group id="active_products" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Active products</label>
+                <field id="activeProducts" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>How many active products must at least exist?</label>
+                </field>
+            </group>
+            <group id="updatable_plugins" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Updatable plugins</label>
+                <field id="pluginsUpdatable" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>How many plugins may exist that need an update?</label>
+                </field>
+            </group>
+            <group id="newsletter_subscribers" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Newsletter Subscribers</label>
+                <field id="newsletterSubscriptions" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>How many new newsletter subscriptions should be made daily?</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
