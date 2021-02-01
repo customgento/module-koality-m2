@@ -8,19 +8,22 @@ use Koality\MagentoPlugin\Model\Config;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Symfony\Component\HttpFoundation\Response;
-
+use Koality\MagentoPlugin\Model\ActiveProductsCollector;
 class Output extends Action
 {
     /**
      * @var Config
      */
     protected $config;
+
+    /**
+     * @var ActiveProductsCollector
+     */
+    protected $collection;
 
     /**
      * @var JsonFactory
@@ -30,12 +33,14 @@ class Output extends Action
     public function __construct(
         Context $context,
         Config $config,
-        JsonFactory $resultJsonFactory
+        JsonFactory $resultJsonFactory,
+        ActiveProductsCollector $collection
 
     ) {
         parent::__construct($context);
         $this->config            = $config;
         $this->resultJsonFactory = $resultJsonFactory;
+        $this->collection = $collection;
     }
 
     public function execute(): Json
@@ -44,6 +49,7 @@ class Output extends Action
         $currentApiKey = $this->getRequest()->getParam('apikey');
         /** @var Redirect $resultRedirect */
         $resultPage = $this->resultJsonFactory->create();
+        $this->collection->getActiveProductsCount();
 
         if ($currentApiKey === '') {
             $resultPage->setHttpResponseCode(Response::HTTP_INTERNAL_SERVER_ERROR);

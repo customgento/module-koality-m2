@@ -11,6 +11,8 @@
                     <comment>The API key must be added to the koality.io configuration in the koality.io
                         backend.
                     </comment>
+                    <frontend_model>Koality\MagentoPlugin\Block\System\Config\ApiKey\Disable</frontend_model>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
                 </field>
             </group>
             <group id="rush_hour" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
