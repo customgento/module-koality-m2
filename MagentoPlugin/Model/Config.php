@@ -25,7 +25,6 @@ class Config
 
     public const ACTIVE_PRODUCTS = 'koality_module_magento/active_products/activeProducts';
 
-    public const UPDATABLE_PLUGINS = 'koality_module_magento/updatable_plugins/pluginsUpdatable';
 
     public const NEWSLETTER_SUBSCRIBERS = 'koality_module_magento/newsletter_subscribers/newsletterSubscriptions';
 
@@ -77,11 +76,6 @@ class Config
     public function getActiveProducts(): ?string
     {
         return $this->scopeConfig->getValue(self::ACTIVE_PRODUCTS, ScopeInterface::SCOPE_STORE);
-    }
-
-    public function getUpdatablePlugins(): ?string
-    {
-        return $this->scopeConfig->getValue(self::UPDATABLE_PLUGINS, ScopeInterface::SCOPE_STORE);
     }
 
     public function getNewsletterSubscribers(): ?string

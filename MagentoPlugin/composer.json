@@ -1,5 +1,5 @@
 {
-  "name": "koality/magentoplugin",
+  "name": "customgento/module-koality-m2",
   "description": "This plugin is used to monitor the business metrics of the shop with koality.io.",
   "type": "magento2-module",
   "version": "1.0.0",

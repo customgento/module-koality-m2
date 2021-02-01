@@ -47,12 +47,6 @@
                     <label>How many active products must at least exist?</label>
                 </field>
             </group>
-            <group id="updatable_plugins" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Updatable plugins</label>
-                <field id="pluginsUpdatable" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>How many plugins may exist that need an update?</label>
-                </field>
-            </group>
             <group id="newsletter_subscribers" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Newsletter Subscribers</label>
                 <field id="newsletterSubscriptions" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
