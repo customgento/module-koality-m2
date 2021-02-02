@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Koality\MagentoPlugin\Setup\Patch\Data;
 
+use Koality\MagentoPlugin\Model\Config as KoalityConfig;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Framework\Setup\Patch\PatchRevertableInterface;
-use Koality\MagentoPlugin\Model\Config as KoalityConfig;
 
 class AddApiKeyToConfig implements DataPatchInterface, PatchRevertableInterface
 {
@@ -16,20 +16,12 @@ class AddApiKeyToConfig implements DataPatchInterface, PatchRevertableInterface
      */
     private $moduleDataSetup;
 
-    /**
-     * @var KoalityConfig
-     */
-    private $config;
-
-    public function __construct(
-        ModuleDataSetupInterface $moduleDataSetup,
-        KoalityConfig $config
-    ) {
-        $this->moduleDataSetup     = $moduleDataSetup;
-        $this->config              = $config;
+    public function __construct(ModuleDataSetupInterface $moduleDataSetup)
+    {
+        $this->moduleDataSetup = $moduleDataSetup;
     }
 
-    public function apply()
+    public function apply(): void
     {
         $this->moduleDataSetup->getConnection()->insert(
             $this->moduleDataSetup->getTable('core_config_data'), [
@@ -49,18 +41,15 @@ class AddApiKeyToConfig implements DataPatchInterface, PatchRevertableInterface
     public static function getDependencies(): array
     {
         return [];
-
     }
 
     public function getAliases(): array
     {
         return [];
-
     }
 
-    public function revert()
+    public function revert(): array
     {
         return [];
-
     }
 }

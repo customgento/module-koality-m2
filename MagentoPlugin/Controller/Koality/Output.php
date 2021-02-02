@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Koality\MagentoPlugin\Controller\Koality;
 
+use Koality\MagentoPlugin\Model\ActiveProductsCollector;
 use Koality\MagentoPlugin\Model\Config;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\Action;
@@ -12,7 +13,7 @@ use Magento\Framework\App\Request\Http;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Symfony\Component\HttpFoundation\Response;
-use Koality\MagentoPlugin\Model\ActiveProductsCollector;
+
 class Output extends Action
 {
     /**
@@ -40,7 +41,7 @@ class Output extends Action
         parent::__construct($context);
         $this->config            = $config;
         $this->resultJsonFactory = $resultJsonFactory;
-        $this->collection = $collection;
+        $this->collection        = $collection;
     }
 
     public function execute(): Json
@@ -49,7 +50,7 @@ class Output extends Action
         $currentApiKey = $this->getRequest()->getParam('apikey');
         /** @var Redirect $resultRedirect */
         $resultPage = $this->resultJsonFactory->create();
-        $this->collection->getActiveProductsCount();
+        // $this->collection->getActiveProductsCount();
 
         if ($currentApiKey === '') {
             $resultPage->setHttpResponseCode(Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -64,6 +65,7 @@ class Output extends Action
         }
 
         $resultPage->setHttpResponseCode(Response::HTTP_OK);
+
         return $resultPage->setData(['success' => true]);
 
     }

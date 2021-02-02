@@ -25,7 +25,6 @@ class Config
 
     public const ACTIVE_PRODUCTS = 'koality_module_magento/active_products/activeProducts';
 
-
     public const NEWSLETTER_SUBSCRIBERS = 'koality_module_magento/newsletter_subscribers/newsletterSubscriptions';
 
     /**
@@ -58,7 +57,7 @@ class Config
         return $this->scopeConfig->getValue(self::ORDERS_PER_RUSHHOUR, ScopeInterface::SCOPE_STORE);
     }
 
-    public function doesRushhourHappenWeekends(): bool
+    public function doesRushHourHappenWeekends(): bool
     {
         return $this->scopeConfig->getValue(self::RUSHHOUR_INCLUDED_WEEKEND, ScopeInterface::SCOPE_STORE);
     }
@@ -68,7 +67,7 @@ class Config
         return $this->scopeConfig->getValue(self::ORDERS_PER_HOUR_NORMAL, ScopeInterface::SCOPE_STORE);
     }
 
-    public function getOpencarts(): ?string
+    public function getOpenCarts(): ?string
     {
         return $this->scopeConfig->getValue(self::OPEN_CARTS_EXISTS, ScopeInterface::SCOPE_STORE);
     }
