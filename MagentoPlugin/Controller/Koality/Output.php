@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Koality\MagentoPlugin\Controller\Koality;
 
-use Koality\MagentoPlugin\Model\ActiveProductsCollector;
+//use Koality\MagentoPlugin\Model\ActiveProductsCollector;
 use Koality\MagentoPlugin\Model\Config;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\Action;
@@ -13,7 +13,7 @@ use Magento\Framework\App\Request\Http;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Symfony\Component\HttpFoundation\Response;
-
+use Koality\MagentoPlugin\Model\CountOrdersCollector;
 class Output extends Action
 {
     /**
@@ -22,7 +22,7 @@ class Output extends Action
     protected $config;
 
     /**
-     * @var ActiveProductsCollector
+     * @var CountOrdersCollector
      */
     protected $collection;
 
@@ -35,7 +35,7 @@ class Output extends Action
         Context $context,
         Config $config,
         JsonFactory $resultJsonFactory,
-        ActiveProductsCollector $collection
+        CountOrdersCollector $collection
 
     ) {
         parent::__construct($context);
@@ -50,7 +50,8 @@ class Output extends Action
         $currentApiKey = $this->getRequest()->getParam('apikey');
         /** @var Redirect $resultRedirect */
         $resultPage = $this->resultJsonFactory->create();
-        // $this->collection->getActiveProductsCount();
+        //TODO remove test call
+         $this->collection->getResult();
 
         if ($currentApiKey === '') {
             $resultPage->setHttpResponseCode(Response::HTTP_INTERNAL_SERVER_ERROR);
