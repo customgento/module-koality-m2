@@ -13,7 +13,7 @@ use Magento\Framework\App\Request\Http;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Symfony\Component\HttpFoundation\Response;
-use Koality\MagentoPlugin\Model\CountOrdersCollector;
+use Koality\MagentoPlugin\Model\OpenCartsCollector;
 class Output extends Action
 {
     /**
@@ -22,7 +22,7 @@ class Output extends Action
     protected $config;
 
     /**
-     * @var CountOrdersCollector
+     * @var OpenCartsCollector
      */
     protected $collection;
 
@@ -35,7 +35,7 @@ class Output extends Action
         Context $context,
         Config $config,
         JsonFactory $resultJsonFactory,
-        CountOrdersCollector $collection
+        OpenCartsCollector $collection
 
     ) {
         parent::__construct($context);
@@ -51,7 +51,7 @@ class Output extends Action
         /** @var Redirect $resultRedirect */
         $resultPage = $this->resultJsonFactory->create();
         //TODO remove test call
-         $this->collection->getResult();
+        // $this->collection->getOpenCartCount();
 
         if ($currentApiKey === '') {
             $resultPage->setHttpResponseCode(Response::HTTP_INTERNAL_SERVER_ERROR);
