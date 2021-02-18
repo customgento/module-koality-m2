@@ -6,13 +6,11 @@
             <resource>Magento_Webapi::config_webapi</resource>
             <group id="koality_apikey" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>koality.io API key</label>
-                <field id="apikey" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="apikey" translate="label" type="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Your secret koality.io API key</label>
                     <comment>The API key must be added to the koality.io configuration in the koality.io
                         backend.
                     </comment>
-                    <frontend_model>Koality\MagentoPlugin\Block\System\Config\ApiKey\Disable</frontend_model>
-                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
                 </field>
             </group>
             <group id="rush_hour" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
