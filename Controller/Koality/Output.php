@@ -14,6 +14,7 @@ use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Symfony\Component\HttpFoundation\Response;
 use Koality\MagentoPlugin\Model\OpenCartsCollector;
+
 class Output extends Action
 {
     /**

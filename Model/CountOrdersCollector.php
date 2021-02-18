@@ -5,24 +5,43 @@ declare(strict_types=1);
 namespace Koality\MagentoPlugin\Model;
 
 use Koality\MagentoPlugin\Api\ResultInterface;
+use Koality\MagentoPlugin\Model\Config;
 use Koality\MagentoPlugin\Model\Formatter\Result;
-use Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
+use Magento\Framework\Api\SearchCriteriaBuilder;
+use Magento\Sales\Api\OrderRepositoryInterface;
 
 class CountOrdersCollector
 {
+    /**
+     * @var SearchCriteriaBuilder
+     */
+    private $searchCriteriaBuilder;
+
+    /**
+     * @var OrderRepositoryInterface
+     */
+    private $orderRepository;
+
     /**
      * @var ResultInterface
      */
     private $resultInterface;
 
-    private array $pluginConfig = [];
+    /**
+     * @var Config
+     */
+    private $config;
 
-    private CollectionFactory $orderCollectionFactory;
-
-    public function __construct(CollectionFactory $orderCollectionFactory, ResultInterface $resultInterface)
-    {
-        $this->orderCollectionFactory = $orderCollectionFactory;
-        $this->resultInterface        = $resultInterface;
+    public function __construct(
+        ResultInterface $resultInterface,
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        OrderRepositoryInterface $orderRepository,
+        Config $config
+    ) {
+        $this->resultInterface       = $resultInterface;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->orderRepository       = $orderRepository;
+        $this->config                = $config;
     }
 
     public function getResult(): ResultInterface
@@ -55,27 +74,21 @@ class CountOrdersCollector
      */
     private function getCurrentSalesThreshold(): int
     {
-        $config = $this->pluginConfig;
-
         $currentWeekDay = date('w');
         $isWeekend      = ($currentWeekDay === 0 || $currentWeekDay === 6);
 
-        $allowRushHour = !($isWeekend && !$config['includeWeekends']);
+        $allowRushHour = !($isWeekend && !$this->config->doesRushHourHappenWeekends());
 
-        if ($allowRushHour && array_key_exists('rushHourBegin', $config) && array_key_exists('rushHourEnd', $config)) {
-            $beginHour = (int)substr($config['rushHourBegin'], 0, 2) . substr($config['rushHourBegin'], 3, 2);
-            $endHour   = (int)substr($config['rushHourEnd'], 0, 2) . substr($config['rushHourEnd'], 3, 2);
-
+        if ($allowRushHour && $this->config->getRushHourBegin() && $this->config->getRushHourEnd()) {
+            $beginHour   = $this->config->getRushHourBegin();
+            $endHour     = $this->config->getRushHourEnd();
             $currentTime = (int)date('Hi');
-
             if ($currentTime < $endHour && $currentTime > $beginHour) {
-                //TODO check this
-                return $config['ordersPerHourRushHour'];
+                return $this->config->getOrdersPerRushHour();
             }
         }
 
-        //TODO check this
-        return $config['ordersPerHourNormal'];
+        return $this->config->getOrdersPerHourNormal();
     }
 
     /**
@@ -85,11 +98,11 @@ class CountOrdersCollector
      */
     private function getLastHourOrderCount(): int
     {
-        $toTime   = date("Y-m-d H:i:s");
-        $fromTime = date('Y-m-d H:i:s', strtotime('- 1 hour'));
-        $orders   = $this->orderCollectionFactory->create()
-            ->addAttributeToFilter('created_at', ['from' => $fromTime, 'to' => $toTime]);
+        $toTime         = date("Y-m-d H:i:s");
+        $fromTime       = date('Y-m-d H:i:s', strtotime('- 1 hour'));
+        $searchCriteria = $this->searchCriteriaBuilder
+            ->addFilter('created_at', ['from' => $fromTime, 'to' => $toTime])->create();
 
-        return $orders->getTotalCount();
+        return $this->orderRepository->getList($searchCriteria)->getTotalCount();
     }
 }

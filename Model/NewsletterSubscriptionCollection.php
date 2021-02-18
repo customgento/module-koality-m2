@@ -6,41 +6,50 @@ namespace Koality\MagentoPlugin\Model;
 
 use Koality\MagentoPlugin\Api\ResultInterface;
 use Koality\MagentoPlugin\Model\Formatter\Result;
+use Koality\MagentoPlugin\Model\Config;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Newsletter\Model\ResourceModel\Subscriber\CollectionFactory;
 
 class NewsletterSubscriptionCollection
 {
+    /**
+     * @var SearchCriteriaBuilder
+     */
+    private $searchCriteriaBuilder;
+
     /**
      * @var ResultInterface
      */
     private $resultInterface;
 
     /**
-     * @var array
-     */
-    private $pluginConfig;
-
-    /**
      * @var CollectionFactory
      */
     private $subscriberCollectionFactory;
 
+    /**
+     * @var Config
+     */
+    private $config;
+
     public function __construct(
-        array $pluginConfig,
         CollectionFactory $subscriberCollectionFactory,
-        ResultInterface $resultInterface
+        ResultInterface $resultInterface,
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        Config $config
     ) {
         $this->subscriberCollectionFactory = $subscriberCollectionFactory;
-        $this->pluginConfig                = $pluginConfig;
         $this->resultInterface             = $resultInterface;
+        $this->searchCriteriaBuilder       = $searchCriteriaBuilder;
+        $this->config                      = $config;
     }
 
     public function getResult(): ResultInterface
     {
         $newsletterSubscriptions = $this->getNewsletterRegistrations();
 
-        if (array_key_exists('newsletterSubscriptions', $this->pluginConfig)) {
-            $minNewsletterSubscriptions = $this->pluginConfig['newsletterSubscriptions'];
+        if ($this->config->getNewsletterSubscribers()) {
+            $minNewsletterSubscriptions = $this->config->getNewsletterSubscribers();
         } else {
             $minNewsletterSubscriptions = 0;
         }
@@ -64,8 +73,9 @@ class NewsletterSubscriptionCollection
 
     private function getNewsletterRegistrations(): int
     {
-        $toTime               = date("Y-m-d H:i:s");
-        $fromTime             = date('Y-m-d H:i:s', strtotime('-1 hour'));
+        $toTime   = date("Y-m-d H:i:s");
+        $fromTime = date('Y-m-d H:i:s', strtotime('-1 hour'));
+        //We use a collection here because an interface for newsletters does not exist
         $subscriberCollection = $this->subscriberCollectionFactory->create()
             ->addFieldToFilter('created_at',
                 [

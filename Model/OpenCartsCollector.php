@@ -6,6 +6,7 @@ namespace Koality\MagentoPlugin\Model;
 
 use Koality\MagentoPlugin\Api\ResultInterface;
 use Koality\MagentoPlugin\Model\Formatter\Result;
+use Koality\MagentoPlugin\Model\Config;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\ResourceModel\Quote\CollectionFactory as QuoteCollectionFactory;
 
@@ -17,9 +18,9 @@ class OpenCartsCollector
     private $resultInterface;
 
     /**
-     * @var array
+     * @var Config
      */
-    private $pluginConfig;
+    private $config;
 
     /**
      * @var QuoteCollectionFactory
@@ -27,19 +28,19 @@ class OpenCartsCollector
     private $quoteCollectionFactory;
 
     public function __construct(
-        array $pluginConfig,
         QuoteCollectionFactory $quoteCollectionFactory,
-        ResultInterface $resultInterface
+        ResultInterface $resultInterface,
+        Config $config
     ) {
         $this->quoteCollectionFactory = $quoteCollectionFactory;
-        $this->pluginConfig           = $pluginConfig;
         $this->resultInterface        = $resultInterface;
+        $this->config                 = $config;
     }
 
     public function getResult(): Result
     {
         $cartCount    = $this->getOpenCartCountFromLastHour();
-        $maxCartCount = $this->pluginConfig['openCarts'];
+        $maxCartCount = $this->config->getOpenCarts();
 
         if ($cartCount > $maxCartCount) {
             $cartResult = new Result(ResultInterface::STATUS_FAIL, ResultInterface::KEY_CARTS_OPEN_TOO_MANY,

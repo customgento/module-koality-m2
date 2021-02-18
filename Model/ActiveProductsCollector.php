@@ -9,6 +9,7 @@ use Koality\MagentoPlugin\Model\Formatter\Result;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
 use Magento\Framework\Api\SearchCriteriaBuilder;
+use Koality\MagentoPlugin\Model\Config;
 
 class ActiveProductsCollector
 {
@@ -27,16 +28,21 @@ class ActiveProductsCollector
      */
     private $resultInterface;
 
-    private array $pluginConfig = [];
+    /**
+     * @var Config
+     */
+    private $config;
 
     public function __construct(
         ProductRepositoryInterface $productRepository,
         SearchCriteriaBuilder $searchCriteriaBuilder,
-        ResultInterface $resultInterface
+        ResultInterface $resultInterface,
+        Config $config
     ) {
         $this->productRepository     = $productRepository;
         $this->resultInterface       = $resultInterface;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->config                = $config;
     }
 
     public function getAllProducts(): ResultInterface
@@ -44,11 +50,7 @@ class ActiveProductsCollector
         //TODO check this variable against original
 
         $activeProductCount = $this->getActiveProductsCount();
-        if (array_key_exists('activeProducts', $this->pluginConfig)) {
-            $minOpenProjects = $this->pluginConfig['activeProducts'];
-        } else {
-            $minOpenProjects = 0;
-        }
+        $minOpenProjects    = $this->config->getActiveProducts() ?? 0;
 
         if ($activeProductCount < $minOpenProjects) {
             $cartResult = new Result(ResultInterface::STATUS_FAIL, ResultInterface::KEY_PRODUCTS_ACTIVE,
