@@ -4,25 +4,42 @@ declare(strict_types=1);
 
 namespace Koality\MagentoPlugin\Model;
 
+use Koality\MagentoPlugin\Api\ResultInterface;
 use Koality\MagentoPlugin\Model\Formatter\Result;
+use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
-use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 
 class ActiveProductsCollector
 {
-    private array $pluginConfig = [];
+    /**
+     * @var SearchCriteriaBuilder
+     */
+    private $searchCriteriaBuilder;
 
     /**
-     * @var ProductCollectionFactory
+     * @var ProductRepositoryInterface
      */
-    private ProductCollectionFactory $productCollectionFactory;
+    private $productRepository;
 
-    public function __construct(ProductCollectionFactory $productCollectionFactory)
-    {
-        $this->productCollectionFactory = $productCollectionFactory;
+    /**
+     * @var ResultInterface
+     */
+    private $resultInterface;
+
+    private array $pluginConfig = [];
+
+    public function __construct(
+        ProductRepositoryInterface $productRepository,
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        ResultInterface $resultInterface
+    ) {
+        $this->productRepository     = $productRepository;
+        $this->resultInterface       = $resultInterface;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
     }
 
-    public function getAllProducts(): Result
+    public function getAllProducts(): ResultInterface
     {
         //TODO check this variable against original
 
@@ -34,19 +51,19 @@ class ActiveProductsCollector
         }
 
         if ($activeProductCount < $minOpenProjects) {
-            $cartResult = new Result(Result::STATUS_FAIL, Result::KEY_PRODUCTS_ACTIVE,
+            $cartResult = new Result(ResultInterface::STATUS_FAIL, ResultInterface::KEY_PRODUCTS_ACTIVE,
                 'There are too few active products in your shop.');
         } else {
-            $cartResult = new Result(Result::STATUS_PASS, Result::KEY_PRODUCTS_ACTIVE,
+            $cartResult = new Result(ResultInterface::STATUS_PASS, ResultInterface::KEY_PRODUCTS_ACTIVE,
                 'There are enough active products in your shop.');
         }
 
-        $cartResult->setLimit($minOpenProjects);
-        $cartResult->setObservedValue($activeProductCount);
-        $cartResult->setObservedValueUnit('products');
-        $cartResult->setObservedValuePrecision(0);
-        $cartResult->setLimitType(Result::LIMIT_TYPE_MIN);
-        $cartResult->setType(Result::TYPE_TIME_SERIES_NUMERIC);
+        $this->resultInterface->setLimit($minOpenProjects);
+        $this->resultInterface->setObservedValue($activeProductCount);
+        $this->resultInterface->setObservedValueUnit('products');
+        $this->resultInterface->setObservedValuePrecision(0);
+        $this->resultInterface->setLimitType(ResultInterface::LIMIT_TYPE_MIN);
+        $this->resultInterface->setType(ResultInterface::TYPE_TIME_SERIES_NUMERIC);
 
         return $cartResult;
     }
@@ -58,10 +75,10 @@ class ActiveProductsCollector
      */
     private function getActiveProductsCount(): int
     {
-        $collection = $this->productCollectionFactory->create()->addAttributeToSelect('*')
-            ->addAttributeToFilter('status', Status::STATUS_ENABLED);
+        $searchCriteria = $this->searchCriteriaBuilder
+            ->addFilter('status', Status::STATUS_ENABLED)
+            ->create();
 
-        return $collection->getSize();
-
+        return count($this->productRepository->getList($searchCriteria)->getItems());
     }
 }

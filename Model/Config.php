@@ -52,7 +52,7 @@ class Config
         return $this->scopeConfig->getValue(self::RUSHHOUR_END, ScopeInterface::SCOPE_STORE);
     }
 
-    public function getOrdersPerRushHour(): ?string
+    public function getOrdersPerRushHour(): ?int
     {
         return $this->scopeConfig->getValue(self::ORDERS_PER_RUSHHOUR, ScopeInterface::SCOPE_STORE);
     }
@@ -62,22 +62,22 @@ class Config
         return $this->scopeConfig->getValue(self::RUSHHOUR_INCLUDED_WEEKEND, ScopeInterface::SCOPE_STORE);
     }
 
-    public function getOrdersPerHourNormal(): ?string
+    public function getOrdersPerHourNormal(): ?int
     {
         return $this->scopeConfig->getValue(self::ORDERS_PER_HOUR_NORMAL, ScopeInterface::SCOPE_STORE);
     }
 
-    public function getOpenCarts(): ?string
+    public function getOpenCarts(): ?int
     {
         return $this->scopeConfig->getValue(self::OPEN_CARTS_EXISTS, ScopeInterface::SCOPE_STORE);
     }
 
-    public function getActiveProducts(): ?string
+    public function getActiveProducts(): ?int
     {
         return $this->scopeConfig->getValue(self::ACTIVE_PRODUCTS, ScopeInterface::SCOPE_STORE);
     }
 
-    public function getNewsletterSubscribers(): ?string
+    public function getNewsletterSubscribers(): ?int
     {
         return $this->scopeConfig->getValue(self::NEWSLETTER_SUBSCRIBERS, ScopeInterface::SCOPE_STORE);
     }

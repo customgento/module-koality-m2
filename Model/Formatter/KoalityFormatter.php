@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Koality\MagentoPlugin\Model\Formatter;
 
+use Koality\MagentoPlugin\Api\ResultInterface;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
 
@@ -15,7 +16,7 @@ class KoalityFormatter
     private $resultJsonFactory;
 
     /**
-     * @var Result[]
+     * @var ResultInterface[]
      */
     private array $results = [];
 
@@ -29,9 +30,9 @@ class KoalityFormatter
      *
      * If the status of the result is "fail" the whole check will be marked as failed.
      *
-     * @param Result $result
+     * @param ResultInterface $result
      */
-    public function addResult(Result $result): void
+    public function addResult(ResultInterface $result): void
     {
         $this->results[] = $result;
     }
@@ -45,7 +46,7 @@ class KoalityFormatter
     {
         $formattedResult = [];
         $checks          = [];
-        $status          = Result::STATUS_PASS;
+        $status          = ResultInterface::STATUS_PASS;
 
         foreach ($this->results as $result) {
             $check = [
@@ -84,8 +85,8 @@ class KoalityFormatter
 
             $checks[$result->getKey()] = $check;
 
-            if ($result->getStatus() === Result::STATUS_FAIL) {
-                $status = Result::STATUS_FAIL;
+            if ($result->getStatus() === ResultInterface::STATUS_FAIL) {
+                $status = ResultInterface::STATUS_FAIL;
             }
         }
 
@@ -107,7 +108,7 @@ class KoalityFormatter
      */
     private function getOutput(string $status): string
     {
-        if ($status === Result::STATUS_PASS) {
+        if ($status === ResultInterface::STATUS_PASS) {
             return 'All Magento health metrics passed.';
         }
 

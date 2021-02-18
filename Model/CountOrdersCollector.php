@@ -4,39 +4,46 @@ declare(strict_types=1);
 
 namespace Koality\MagentoPlugin\Model;
 
+use Koality\MagentoPlugin\Api\ResultInterface;
 use Koality\MagentoPlugin\Model\Formatter\Result;
 use Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
 
 class CountOrdersCollector
 {
+    /**
+     * @var ResultInterface
+     */
+    private $resultInterface;
+
     private array $pluginConfig = [];
 
     private CollectionFactory $orderCollectionFactory;
 
-    public function __construct(CollectionFactory $orderCollectionFactory)
+    public function __construct(CollectionFactory $orderCollectionFactory, ResultInterface $resultInterface)
     {
         $this->orderCollectionFactory = $orderCollectionFactory;
+        $this->resultInterface        = $resultInterface;
     }
 
-    public function getResult(): Result
+    public function getResult(): ResultInterface
     {
         $salesThreshold     = $this->getCurrentSalesThreshold();
         $currentOrdersCount = $this->getLastHourOrderCount();
 
         if ($currentOrdersCount < $salesThreshold) {
-            $orderResult = new Result(Result::STATUS_FAIL, Result::KEY_ORDERS_TOO_FEW,
+            $orderResult = new Result(ResultInterface::STATUS_FAIL, ResultInterface::KEY_ORDERS_TOO_FEW,
                 'There were too few orders within the last hour.');
         } else {
-            $orderResult = new Result(Result::STATUS_PASS, Result::KEY_ORDERS_TOO_FEW,
+            $orderResult = new Result(ResultInterface::STATUS_PASS, ResultInterface::KEY_ORDERS_TOO_FEW,
                 'There were enough orders within the last hour.');
         }
 
-        $orderResult->setLimit($salesThreshold);
-        $orderResult->setObservedValue($currentOrdersCount);
-        $orderResult->setObservedValuePrecision(2);
-        $orderResult->setObservedValueUnit('orders');
-        $orderResult->setLimitType(Result::LIMIT_TYPE_MIN);
-        $orderResult->setType(Result::TYPE_TIME_SERIES_NUMERIC);
+        $this->resultInterface->setLimit($salesThreshold);
+        $this->resultInterface->setObservedValue($currentOrdersCount);
+        $this->resultInterface->setObservedValuePrecision(2);
+        $this->resultInterface->setObservedValueUnit('orders');
+        $this->resultInterface->setLimitType(ResultInterface::LIMIT_TYPE_MIN);
+        $this->resultInterface->setType(ResultInterface::TYPE_TIME_SERIES_NUMERIC);
 
         return $orderResult;
     }

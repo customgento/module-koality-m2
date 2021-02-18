@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace Koality\MagentoPlugin\Model;
 
+use Koality\MagentoPlugin\Api\ResultInterface;
 use Koality\MagentoPlugin\Model\Formatter\Result;
 use Magento\Newsletter\Model\ResourceModel\Subscriber\CollectionFactory;
 
 class NewsletterSubscriptionCollection
 {
+    /**
+     * @var ResultInterface
+     */
+    private $resultInterface;
+
     /**
      * @var array
      */
@@ -19,13 +25,17 @@ class NewsletterSubscriptionCollection
      */
     private $subscriberCollectionFactory;
 
-    public function __construct(array $pluginConfig, CollectionFactory $subscriberCollectionFactory)
-    {
+    public function __construct(
+        array $pluginConfig,
+        CollectionFactory $subscriberCollectionFactory,
+        ResultInterface $resultInterface
+    ) {
         $this->subscriberCollectionFactory = $subscriberCollectionFactory;
         $this->pluginConfig                = $pluginConfig;
+        $this->resultInterface             = $resultInterface;
     }
 
-    public function getResult(): Result
+    public function getResult(): ResultInterface
     {
         $newsletterSubscriptions = $this->getNewsletterRegistrations();
 
@@ -36,18 +46,18 @@ class NewsletterSubscriptionCollection
         }
 
         if ($newsletterSubscriptions < $minNewsletterSubscriptions) {
-            $newsletterResult = new Result(Result::STATUS_FAIL, Result::KEY_NEWSLETTER_TOO_FEW,
+            $newsletterResult = new Result(ResultInterface::STATUS_FAIL, ResultInterface::KEY_NEWSLETTER_TOO_FEW,
                 'There were too few newsletter subscriptions yesterday.');
         } else {
-            $newsletterResult = new Result(Result::STATUS_PASS, Result::KEY_NEWSLETTER_TOO_FEW,
+            $newsletterResult = new Result(ResultInterface::STATUS_PASS, ResultInterface::KEY_NEWSLETTER_TOO_FEW,
                 'There were enough newsletter subscriptions yesterday.');
         }
 
-        $newsletterResult->setLimit($minNewsletterSubscriptions);
-        $newsletterResult->setObservedValue($newsletterSubscriptions);
-        $newsletterResult->setObservedValueUnit('newsletters');
-        $newsletterResult->setLimitType(Result::LIMIT_TYPE_MIN);
-        $newsletterResult->setType(Result::TYPE_TIME_SERIES_NUMERIC);
+        $this->resultInterface->setLimit($minNewsletterSubscriptions);
+        $this->resultInterface->setObservedValue($newsletterSubscriptions);
+        $this->resultInterface->setObservedValueUnit('newsletters');
+        $this->resultInterface->setLimitType(ResultInterface::LIMIT_TYPE_MIN);
+        $this->resultInterface->setType(ResultInterface::TYPE_TIME_SERIES_NUMERIC);
 
         return $newsletterResult;
     }
