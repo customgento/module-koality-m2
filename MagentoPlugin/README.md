@@ -1,1 +1,0 @@
-# module-koality-m2
