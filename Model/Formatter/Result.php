@@ -61,9 +61,9 @@ class Result implements ResultInterface
     /**
      * Result constructor.
      *
-     * @param string $status
-     * @param string $key
-     * @param string $message
+     * @param string|null $status
+     * @param string|null $key
+     * @param string|null $message
      */
     public function __construct(?string $status, ?string $key, ?string $message)
     {

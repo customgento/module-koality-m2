@@ -13,11 +13,6 @@ use Magento\Quote\Model\ResourceModel\Quote\CollectionFactory as QuoteCollection
 class OpenCartsCollector
 {
     /**
-     * @var ResultInterface
-     */
-    private $resultInterface;
-
-    /**
      * @var Config
      */
     private $config;
@@ -29,11 +24,9 @@ class OpenCartsCollector
 
     public function __construct(
         QuoteCollectionFactory $quoteCollectionFactory,
-        ResultInterface $resultInterface,
         Config $config
     ) {
         $this->quoteCollectionFactory = $quoteCollectionFactory;
-        $this->resultInterface        = $resultInterface;
         $this->config                 = $config;
     }
 

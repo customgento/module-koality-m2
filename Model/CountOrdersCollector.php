@@ -23,22 +23,15 @@ class CountOrdersCollector
     private $orderRepository;
 
     /**
-     * @var ResultInterface
-     */
-    private $resultInterface;
-
-    /**
      * @var Config
      */
     private $config;
 
     public function __construct(
-        ResultInterface $resultInterface,
         SearchCriteriaBuilder $searchCriteriaBuilder,
         OrderRepositoryInterface $orderRepository,
         Config $config
     ) {
-        $this->resultInterface       = $resultInterface;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->orderRepository       = $orderRepository;
         $this->config                = $config;

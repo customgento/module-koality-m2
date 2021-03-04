@@ -24,11 +24,6 @@ class ActiveProductsCollector
     private $productRepository;
 
     /**
-     * @var ResultInterface
-     */
-    private $resultInterface;
-
-    /**
      * @var Config
      */
     private $config;
@@ -36,11 +31,9 @@ class ActiveProductsCollector
     public function __construct(
         ProductRepositoryInterface $productRepository,
         SearchCriteriaBuilder $searchCriteriaBuilder,
-        ResultInterface $resultInterface,
         Config $config
     ) {
         $this->productRepository     = $productRepository;
-        $this->resultInterface       = $resultInterface;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->config                = $config;
     }

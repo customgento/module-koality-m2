@@ -7,21 +7,10 @@ namespace Koality\MagentoPlugin\Model;
 use Koality\MagentoPlugin\Api\ResultInterface;
 use Koality\MagentoPlugin\Model\Formatter\Result;
 use Koality\MagentoPlugin\Model\Config;
-use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Newsletter\Model\ResourceModel\Subscriber\CollectionFactory;
 
 class NewsletterSubscriptionCollection
 {
-    /**
-     * @var SearchCriteriaBuilder
-     */
-    private $searchCriteriaBuilder;
-
-    /**
-     * @var ResultInterface
-     */
-    private $resultInterface;
-
     /**
      * @var CollectionFactory
      */
@@ -34,13 +23,9 @@ class NewsletterSubscriptionCollection
 
     public function __construct(
         CollectionFactory $subscriberCollectionFactory,
-        ResultInterface $resultInterface,
-        SearchCriteriaBuilder $searchCriteriaBuilder,
         Config $config
     ) {
         $this->subscriberCollectionFactory = $subscriberCollectionFactory;
-        $this->resultInterface             = $resultInterface;
-        $this->searchCriteriaBuilder       = $searchCriteriaBuilder;
         $this->config                      = $config;
     }
 

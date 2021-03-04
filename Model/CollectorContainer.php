@@ -15,11 +15,6 @@ use Magento\Framework\Controller\Result\JsonFactory;
 class CollectorContainer
 {
     /**
-     * @var KoalityFormatter
-     */
-    private $formatter;
-
-    /**
      * @var CountOrdersCollector
      */
     private $countOrderCollector;
@@ -45,14 +40,12 @@ class CollectorContainer
     private $resultJsonFactory;
 
     public function __construct(
-        KoalityFormatter $formatter,
         CountOrdersCollector $countOrderCollector,
         ActiveProductsCollector $activeProductsCollector,
         OpenCartsCollector $openCartsCollector,
         NewsletterSubscriptionCollection $newsletterSubscriptionCollection,
         JsonFactory $resultJsonFactory
     ) {
-        $this->formatter                        = $formatter;
         $this->countOrderCollector              = $countOrderCollector;
         $this->activeProductsCollector          = $activeProductsCollector;
         $this->openCartsCollector               = $openCartsCollector;
