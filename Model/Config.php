@@ -39,22 +39,22 @@ class Config
 
     public function getApiKey(): ?string
     {
-        return $this->scopeConfig->getValue(self::KOALITY_API_KEY, ScopeInterface::SCOPE_STORE);
+        return (string)$this->scopeConfig->getValue(self::KOALITY_API_KEY, ScopeInterface::SCOPE_STORE);
     }
 
     public function getRushHourBegin(): ?string
     {
-        return $this->scopeConfig->getValue(self::RUSHHOUR_BEGIN, ScopeInterface::SCOPE_STORE);
+        return (string)$this->scopeConfig->getValue(self::RUSHHOUR_BEGIN, ScopeInterface::SCOPE_STORE);
     }
 
     public function getRushHourEnd(): ?string
     {
-        return $this->scopeConfig->getValue(self::RUSHHOUR_END, ScopeInterface::SCOPE_STORE);
+        return (string)$this->scopeConfig->getValue(self::RUSHHOUR_END, ScopeInterface::SCOPE_STORE);
     }
 
     public function getOrdersPerRushHour(): ?int
     {
-        return $this->scopeConfig->getValue(self::ORDERS_PER_RUSHHOUR, ScopeInterface::SCOPE_STORE);
+        return (int)$this->scopeConfig->getValue(self::ORDERS_PER_RUSHHOUR, ScopeInterface::SCOPE_STORE);
     }
 
     public function doesRushHourHappenWeekends(): bool
@@ -64,21 +64,21 @@ class Config
 
     public function getOrdersPerHourNormal(): ?int
     {
-        return $this->scopeConfig->getValue(self::ORDERS_PER_HOUR_NORMAL, ScopeInterface::SCOPE_STORE);
+        return (int)$this->scopeConfig->getValue(self::ORDERS_PER_HOUR_NORMAL, ScopeInterface::SCOPE_STORE);
     }
 
     public function getOpenCarts(): ?int
     {
-        return $this->scopeConfig->getValue(self::OPEN_CARTS_EXISTS, ScopeInterface::SCOPE_STORE);
+        return (int)$this->scopeConfig->getValue(self::OPEN_CARTS_EXISTS, ScopeInterface::SCOPE_STORE);
     }
 
     public function getActiveProducts(): ?int
     {
-        return $this->scopeConfig->getValue(self::ACTIVE_PRODUCTS, ScopeInterface::SCOPE_STORE);
+        return (int)$this->scopeConfig->getValue(self::ACTIVE_PRODUCTS, ScopeInterface::SCOPE_STORE);
     }
 
     public function getNewsletterSubscribers(): ?int
     {
-        return $this->scopeConfig->getValue(self::NEWSLETTER_SUBSCRIBERS, ScopeInterface::SCOPE_STORE);
+        return (int)$this->scopeConfig->getValue(self::NEWSLETTER_SUBSCRIBERS, ScopeInterface::SCOPE_STORE);
     }
 }

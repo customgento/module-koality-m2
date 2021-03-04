@@ -49,12 +49,12 @@ class OpenCartsCollector
             $cartResult = new Result(ResultInterface::STATUS_PASS, ResultInterface::KEY_CARTS_OPEN_TOO_MANY,
                 'There are not too many open carts at the moment.');
         }
-        $this->resultInterface->setLimit($maxCartCount);
-        $this->resultInterface->setObservedValue($cartCount);
-        $this->resultInterface->setObservedValueUnit('carts');
-        $this->resultInterface->setObservedValuePrecision(0);
-        $this->resultInterface->setLimitType(ResultInterface::LIMIT_TYPE_MAX);
-        $this->resultInterface->setType(ResultInterface::TYPE_TIME_SERIES_NUMERIC);
+        $cartResult->setLimit($maxCartCount);
+        $cartResult->setObservedValue($cartCount);
+        $cartResult->setObservedValueUnit('carts');
+        $cartResult->setObservedValuePrecision(0);
+        $cartResult->setLimitType(ResultInterface::LIMIT_TYPE_MAX);
+        $cartResult->setType(ResultInterface::TYPE_TIME_SERIES_NUMERIC);
 
         return $cartResult;
     }

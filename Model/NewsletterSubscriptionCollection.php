@@ -62,26 +62,25 @@ class NewsletterSubscriptionCollection
                 'There were enough newsletter subscriptions yesterday.');
         }
 
-        $this->resultInterface->setLimit($minNewsletterSubscriptions);
-        $this->resultInterface->setObservedValue($newsletterSubscriptions);
-        $this->resultInterface->setObservedValueUnit('newsletters');
-        $this->resultInterface->setLimitType(ResultInterface::LIMIT_TYPE_MIN);
-        $this->resultInterface->setType(ResultInterface::TYPE_TIME_SERIES_NUMERIC);
+        $newsletterResult->setLimit($minNewsletterSubscriptions);
+        $newsletterResult->setObservedValue($newsletterSubscriptions);
+        $newsletterResult->setObservedValuePrecision(0);
+        $newsletterResult->setObservedValueUnit('newsletters');
+        $newsletterResult->setLimitType(ResultInterface::LIMIT_TYPE_MIN);
+        $newsletterResult->setType(ResultInterface::TYPE_TIME_SERIES_NUMERIC);
 
         return $newsletterResult;
     }
 
     private function getNewsletterRegistrations(): int
     {
-        $toTime   = date("Y-m-d H:i:s");
-        $fromTime = date('Y-m-d H:i:s', strtotime('-1 hour'));
+        $orderTo   = date("Y-m-d H:i:s");
+        $orderFrom = date('Y-m-d H:i:s', strtotime('-1 days'));
         //We use a collection here because an interface for newsletters does not exist
         $subscriberCollection = $this->subscriberCollectionFactory->create()
-            ->addFieldToFilter('created_at',
-                [
-                    'from' => $fromTime,
-                    'to'   => $toTime
-                ]);
+            ->addFieldToSelect('*')
+            ->addFieldToSelect('created_at', $orderFrom)
+            ->addFieldToSelect('created_at', $orderTo);
         $subscriberSize       = $subscriberCollection->getSize();
         if ($subscriberSize <= 0) {
             return -1;

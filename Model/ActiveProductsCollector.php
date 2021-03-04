@@ -60,12 +60,12 @@ class ActiveProductsCollector
                 'There are enough active products in your shop.');
         }
 
-        $this->resultInterface->setLimit($minOpenProjects);
-        $this->resultInterface->setObservedValue($activeProductCount);
-        $this->resultInterface->setObservedValueUnit('products');
-        $this->resultInterface->setObservedValuePrecision(0);
-        $this->resultInterface->setLimitType(ResultInterface::LIMIT_TYPE_MIN);
-        $this->resultInterface->setType(ResultInterface::TYPE_TIME_SERIES_NUMERIC);
+        $cartResult->setLimit($minOpenProjects);
+        $cartResult->setObservedValue($activeProductCount);
+        $cartResult->setObservedValueUnit('products');
+        $cartResult->setObservedValuePrecision(0);
+        $cartResult->setLimitType(ResultInterface::LIMIT_TYPE_MIN);
+        $cartResult->setType(ResultInterface::TYPE_TIME_SERIES_NUMERIC);
 
         return $cartResult;
     }

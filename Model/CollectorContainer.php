@@ -15,11 +15,6 @@ use Magento\Framework\Controller\Result\JsonFactory;
 class CollectorContainer
 {
     /**
-     * @var Collector[]
-     */
-    private $collectors = [];
-
-    /**
      * @var KoalityFormatter
      */
     private $formatter;

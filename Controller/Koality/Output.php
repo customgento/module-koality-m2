@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Koality\MagentoPlugin\Controller\Koality;
 
 use Koality\MagentoPlugin\Model\Config;
+use Koality\MagentoPlugin\Model\Formatter\KoalityFormatter;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
@@ -13,6 +14,7 @@ use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Symfony\Component\HttpFoundation\Response;
 use Koality\MagentoPlugin\Model\CollectorContainer;
+use Magento\Framework\Serialize\Serializer\Json as Serializer;
 
 class Output extends Action
 {
@@ -31,20 +33,24 @@ class Output extends Action
      */
     private $collectorContainer;
 
+
+
     public function __construct(
         Context $context,
         Config $config,
         JsonFactory $resultJsonFactory,
         CollectorContainer $collectorContainer
 
+
     ) {
         parent::__construct($context);
         $this->config             = $config;
         $this->resultJsonFactory  = $resultJsonFactory;
         $this->collectorContainer = $collectorContainer;
+
     }
 
-    public function execute(): Json
+    public function execute():Json
     {
         /** @var Http $currentApiKey */
         $currentApiKey = $this->getRequest()->getParam('apikey');
@@ -64,8 +70,15 @@ class Output extends Action
 
         $resultPage->setHttpResponseCode(Response::HTTP_OK);
 
-        return $resultPage->setData([$this->collectorContainer->run()]);
+        $formatter = $this->collectResults();
 
+        return $formatter->getFormattedResults();
+
+    }
+
+    private function collectResults(): KoalityFormatter
+    {
+        return $this->collectorContainer->run();
     }
 
 }

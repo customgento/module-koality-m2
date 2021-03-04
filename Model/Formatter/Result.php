@@ -65,7 +65,7 @@ class Result implements ResultInterface
      * @param string $key
      * @param string $message
      */
-    public function __construct(string $status, string $key, string $message)
+    public function __construct(?string $status, ?string $key, ?string $message)
     {
         $this->status  = $status;
         $this->message = $message;
