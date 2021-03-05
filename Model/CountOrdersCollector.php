@@ -78,7 +78,7 @@ class CountOrdersCollector
         $currentWeekDay = date('w');
         $isWeekend      = ($currentWeekDay === 0 || $currentWeekDay === 6);
         $allowRushHour  = !($isWeekend && !$this->config->doesRushHourHappenWeekends());
-        if ($allowRushHour &&  $this->isRushHour()) {
+        if ($allowRushHour && $this->isRushHour()) {
             return (int)$this->config->getOrdersPerRushHour();
         }
 
