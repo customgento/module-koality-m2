@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Koality\MagentoPlugin\Test\Integration;
+
 use Magento\Framework\App\ObjectManager as AppObjectManager;
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Module\ModuleList;
