@@ -18,7 +18,7 @@ class KoalityFormatter
     /**
      * @var ResultInterface[]
      */
-    private array $results;
+    private $results;
 
     public function __construct(JsonFactory $resultJsonFactory)
     {
