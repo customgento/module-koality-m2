@@ -59,7 +59,7 @@ class Config
 
     public function doesRushHourHappenWeekends(): bool
     {
-        return $this->scopeConfig->getValue(self::RUSHHOUR_INCLUDED_WEEKEND, ScopeInterface::SCOPE_STORE);
+        return (bool)$this->scopeConfig->getValue(self::RUSHHOUR_INCLUDED_WEEKEND, ScopeInterface::SCOPE_STORE);
     }
 
     public function getOrdersPerHourNormal(): ?int

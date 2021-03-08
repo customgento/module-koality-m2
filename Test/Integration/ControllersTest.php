@@ -7,8 +7,6 @@ namespace Koality\MagentoPlugin\Test\Integration;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 use Magento\Framework\ObjectManagerInterface;
-use Koality\MagentoPlugin\Model\CollectorContainer;
-use Koality\MagentoPlugin\Model\ActiveProductsCollector;
 use Koality\MagentoPlugin\Model\Config;
 
 class ControllersTest extends TestCase
@@ -19,43 +17,37 @@ class ControllersTest extends TestCase
     private $objectManager;
 
     /**
-     * @var CollectorContainer
-     */
-    private $activeProductsCollector;
-
-    /**
      * @var Config
      */
     private $config;
 
     protected function setUp(): void
     {
-        $this->objectManager           = Bootstrap::getObjectManager();
-        $this->activeProductsCollector = $this->objectManager->create(ActiveProductsCollector::class);
-        $this->config                  = $this->objectManager->create(Config::class);
+        $this->objectManager = Bootstrap::getObjectManager();
+        $this->config        = $this->objectManager->create(Config::class);
     }
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture koality_module_magento/rush_hour/rushHourBegin 10:00
+     * @magentoConfigFixture current_store koality_module_magento/rush_hour/rushHourBegin 10,00,00
      */
     public function testRetrieveRushHourBegin(): void
     {
-        self::assertEquals('10:10', $this->config->getRushHourBegin());
+        self::assertEquals('10,00,00', $this->config->getRushHourBegin());
     }
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture koality_module_magento/rush_hour/rushHourEnd 17:00
+     * @magentoConfigFixture current_store koality_module_magento/rush_hour/rushHourEnd 17,00,00
      */
     public function testRetrieveRushHourEnd(): void
     {
-        self::assertEquals('17:00', $this->config->getRushHourBegin());
+        self::assertEquals('17,00,00', $this->config->getRushHourEnd());
     }
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture koality_module_magento/rush_hour/ordersPerHourRushHour 50
+     * @magentoConfigFixture current_store koality_module_magento/rush_hour/ordersPerHourRushHour 50
      */
     public function testOrdersPerRushHour(): void
     {
@@ -64,7 +56,7 @@ class ControllersTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture koality_module_magento/rush_hour/includeWeekends 1
+     * @magentoConfigFixture current_store koality_module_magento/rush_hour/includeWeekends true
      */
     public function testRushHourIncludedWeekend(): void
     {
@@ -73,7 +65,7 @@ class ControllersTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture koality_module_magento/opening_hours/ordersPerHourNormal 10
+     * @magentoConfigFixture current_store koality_module_magento/opening_hours/ordersPerHourNormal 10
      */
     public function testOrdersPerHourNormal(): void
     {
@@ -82,7 +74,7 @@ class ControllersTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture koality_module_magento/open_carts/openCarts 10
+     * @magentoConfigFixture current_store koality_module_magento/open_carts/openCarts 10
      */
     public function testOpenCartsExists(): void
     {
@@ -91,7 +83,7 @@ class ControllersTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture koality_module_magento/active_products/activeProducts 100
+     * @magentoConfigFixture current_store koality_module_magento/active_products/activeProducts 100
      */
     public function testGetActiveProducts(): void
     {
@@ -100,7 +92,7 @@ class ControllersTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture koality_module_magento/newsletter_subscribers/newsletterSubscriptions 100
+     * @magentoConfigFixture current_store koality_module_magento/newsletter_subscribers/newsletterSubscriptions 100
      */
     public function testGetNewsletterSubscribers(): void
     {
