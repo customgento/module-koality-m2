@@ -46,23 +46,23 @@ class KoalityFormatter
                 $check['limit'] = $result->getLimit();
             }
 
-            if (!is_null($result->getLimitType())) {
+            if ($result->getLimitType() !== null) {
                 $check['limitType'] = $result->getLimitType();
             }
 
-            if (!is_null($result->getObservedValue())) {
+            if ($result->getObservedValue() !== null) {
                 $check['observedValue'] = $result->getObservedValue();
             }
 
-            if (!is_null($result->getObservedValueUnit())) {
+            if ($result->getObservedValueUnit() !== null) {
                 $check['observedUnit'] = $result->getObservedValueUnit();
             }
 
-            if (!is_null($result->getObservedValuePrecision())) {
+            if ($result->getObservedValuePrecision() !== null) {
                 $check['observedValuePrecision'] = $result->getObservedValuePrecision();
             }
 
-            if (!is_null($result->getType())) {
+            if ($result->getType() !== null) {
                 $check['metricType'] = $result->getType();
             }
 

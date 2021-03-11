@@ -46,7 +46,6 @@ class Status extends Action implements HttpGetActionInterface
         JsonFactory $resultJsonFactory,
         CollectorContainer $collectorContainer,
         RequestInterface $request
-
     ) {
         parent::__construct($context);
         $this->config             = $config;
