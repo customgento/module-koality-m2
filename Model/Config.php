@@ -9,23 +9,21 @@ use Magento\Store\Model\ScopeInterface;
 
 class Config
 {
-    public const KOALITY_API_KEY = 'koality_module_magento/koality_apikey/apikey';
+    public const KOALITY_API_KEY = 'koality/api_key/api_key';
 
-    public const RUSHHOUR_BEGIN = 'koality_module_magento/rush_hour/rushHourBegin';
+    public const RUSHHOUR_BEGIN = 'koality/rush_hour/rush_hour_begin';
 
-    public const RUSHHOUR_END = 'koality_module_magento/rush_hour/rushHourEnd';
+    public const RUSHHOUR_END = 'koality/rush_hour/rush_hour_end';
 
-    public const ORDERS_PER_RUSHHOUR = 'koality_module_magento/rush_hour/ordersPerHourRushHour';
+    public const ORDERS_PER_RUSHHOUR = 'koality/rush_hour/orders_per_hour_rushHour';
 
-    public const RUSHHOUR_INCLUDED_WEEKEND = 'koality_module_magento/rush_hour/includeWeekends';
+    public const RUSHHOUR_INCLUDED_WEEKEND = 'koality/rush_hour/include_weekends';
 
-    public const ORDERS_PER_HOUR_NORMAL = 'koality_module_magento/opening_hours/ordersPerHourNormal';
+    public const ORDERS_PER_HOUR_NORMAL = 'koality/opening_hours/orders_per_hour_normal';
 
-    public const OPEN_CARTS_EXISTS = 'koality_module_magento/open_carts/openCarts';
+    public const OPEN_CARTS_EXISTS = 'koality/open_carts/open_carts';
 
-    public const ACTIVE_PRODUCTS = 'koality_module_magento/active_products/activeProducts';
-
-    public const NEWSLETTER_SUBSCRIBERS = 'koality_module_magento/newsletter_subscribers/newsletterSubscriptions';
+    public const ACTIVE_PRODUCTS = 'koality/active_products/active_products';
 
     /**
      * @var ScopeConfigInterface
@@ -59,7 +57,7 @@ class Config
 
     public function doesRushHourHappenWeekends(): bool
     {
-        return (bool)$this->scopeConfig->getValue(self::RUSHHOUR_INCLUDED_WEEKEND, ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue(self::RUSHHOUR_INCLUDED_WEEKEND, ScopeInterface::SCOPE_STORE);
     }
 
     public function getOrdersPerHourNormal(): ?int
@@ -75,10 +73,5 @@ class Config
     public function getActiveProducts(): ?int
     {
         return (int)$this->scopeConfig->getValue(self::ACTIVE_PRODUCTS, ScopeInterface::SCOPE_STORE);
-    }
-
-    public function getNewsletterSubscribers(): ?int
-    {
-        return (int)$this->scopeConfig->getValue(self::NEWSLETTER_SUBSCRIBERS, ScopeInterface::SCOPE_STORE);
     }
 }

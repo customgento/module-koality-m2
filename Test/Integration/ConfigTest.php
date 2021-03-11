@@ -83,14 +83,4 @@ class ConfigTest extends TestCase
     {
         self::assertEquals(100, $this->config->getActiveProducts());
     }
-
-    /**
-     * @magentoAppIsolation  enabled
-     * @magentoConfigFixture koality/newsletter_subscribers/newsletter_subscriptions 100
-     */
-    public function testGetNewsletterSubscribers(): void
-    {
-        self::assertEquals(100, $this->config->getNewsletterSubscribers());
-    }
 }
-

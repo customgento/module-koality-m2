@@ -6,8 +6,9 @@ namespace Koality\MagentoPlugin\Controller\Health;
 
 use Koality\MagentoPlugin\Model\CollectorContainer;
 use Koality\MagentoPlugin\Model\Config;
-use Koality\MagentoPlugin\Model\Formatter\KoalityFormatter;
+use Magento\Framework\App\Action\Action;
 use Magento\Backend\Model\View\Result\Redirect;
+use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\App\RequestInterface;
@@ -15,8 +16,10 @@ use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Symfony\Component\HttpFoundation\Response;
 
-class Status implements HttpGetActionInterface
+class Status extends Action implements HttpGetActionInterface
 {
+    public const ADMIN_RESOURCE = 'Koaliuty_MagentoPlugin::Koality_status';
+
     /**
      * @var Config
      */
@@ -38,12 +41,14 @@ class Status implements HttpGetActionInterface
     private $request;
 
     public function __construct(
+        Context $context,
         Config $config,
         JsonFactory $resultJsonFactory,
         CollectorContainer $collectorContainer,
         RequestInterface $request
 
     ) {
+        parent::__construct($context);
         $this->config             = $config;
         $this->resultJsonFactory  = $resultJsonFactory;
         $this->collectorContainer = $collectorContainer;
@@ -68,17 +73,9 @@ class Status implements HttpGetActionInterface
             return $resultPage->setData(['error' => 'API key does not match. Please check API key and try again.']);
         }
 
-        $resultPage->setHttpResponseCode(Response::HTTP_OK);
+        $formatter = $this->collectorContainer->run();
 
-        $formatter = $this->collectResults();
-
-        return $formatter->getFormattedResults();
-
+        return $this->resultJsonFactory->create()
+            ->setData($formatter->getFormattedResults());
     }
-
-    private function collectResults(): KoalityFormatter
-    {
-        return $this->collectorContainer->run();
-    }
-
 }

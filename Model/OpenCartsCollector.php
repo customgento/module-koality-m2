@@ -36,11 +36,17 @@ class OpenCartsCollector
         $maxCartCount = $this->config->getOpenCarts();
 
         if ($cartCount > $maxCartCount) {
-            $cartResult = new Result(ResultInterface::STATUS_FAIL, ResultInterface::KEY_CARTS_OPEN_TOO_MANY,
-                'There are too many open carts at the moment.');
+            $cartResult = new Result(
+                ResultInterface::STATUS_FAIL,
+                ResultInterface::KEY_CARTS_OPEN_TOO_MANY,
+                'There are too many open carts at the moment.'
+            );
         } else {
-            $cartResult = new Result(ResultInterface::STATUS_PASS, ResultInterface::KEY_CARTS_OPEN_TOO_MANY,
-                'There are not too many open carts at the moment.');
+            $cartResult = new Result(
+                ResultInterface::STATUS_PASS,
+                ResultInterface::KEY_CARTS_OPEN_TOO_MANY,
+                'There are not too many open carts at the moment.'
+            );
         }
         $cartResult->setLimit($maxCartCount);
         $cartResult->setObservedValue($cartCount);
@@ -61,6 +67,5 @@ class OpenCartsCollector
             ->addFieldToFilter('created_at', ['from' => $fromTime, 'to' => $toTime]);
 
         return $quoteCollection->getSize();
-
     }
 }

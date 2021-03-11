@@ -51,11 +51,17 @@ class CountOrdersCollector
         $currentOrdersCount = $this->getLastHourOrderCount();
 
         if ($currentOrdersCount < $salesThreshold) {
-            $orderResult = new Result(ResultInterface::STATUS_FAIL, ResultInterface::KEY_ORDERS_TOO_FEW,
-                'There were too few orders within the last hour.');
+            $orderResult = new Result(
+                ResultInterface::STATUS_FAIL,
+                ResultInterface::KEY_ORDERS_TOO_FEW,
+                'There were too few orders within the last hour.'
+            );
         } else {
-            $orderResult = new Result(ResultInterface::STATUS_PASS, ResultInterface::KEY_ORDERS_TOO_FEW,
-                'There were enough orders within the last hour.');
+            $orderResult = new Result(
+                ResultInterface::STATUS_PASS,
+                ResultInterface::KEY_ORDERS_TOO_FEW,
+                'There were enough orders within the last hour.'
+            );
         }
 
         $orderResult->setLimit($salesThreshold);

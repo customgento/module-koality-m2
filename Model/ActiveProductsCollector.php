@@ -40,27 +40,31 @@ class ActiveProductsCollector
 
     public function getAllProducts(): ResultInterface
     {
-        //TODO check this variable against original
+        $activeProductCount       = $this->getActiveProductsCount();
+        $minNumberOfActiveProduct = $this->config->getActiveProducts() ?? 0;
 
-        $activeProductCount = $this->getActiveProductsCount();
-        $minOpenProjects    = $this->config->getActiveProducts() ?? 0;
-
-        if ($activeProductCount < $minOpenProjects) {
-            $cartResult = new Result(ResultInterface::STATUS_FAIL, ResultInterface::KEY_PRODUCTS_ACTIVE,
-                'There are too few active products in your shop.');
+        if ($activeProductCount < $minNumberOfActiveProduct) {
+            $result = new Result(
+                ResultInterface::STATUS_FAIL,
+                ResultInterface::KEY_PRODUCTS_ACTIVE,
+                'There are too few active products in your shop.'
+            );
         } else {
-            $cartResult = new Result(ResultInterface::STATUS_PASS, ResultInterface::KEY_PRODUCTS_ACTIVE,
-                'There are enough active products in your shop.');
+            $result = new Result(
+                ResultInterface::STATUS_PASS,
+                ResultInterface::KEY_PRODUCTS_ACTIVE,
+                'There are enough active products in your shop.'
+            );
         }
 
-        $cartResult->setLimit($minOpenProjects);
-        $cartResult->setObservedValue($activeProductCount);
-        $cartResult->setObservedValueUnit('products');
-        $cartResult->setObservedValuePrecision(0);
-        $cartResult->setLimitType(ResultInterface::LIMIT_TYPE_MIN);
-        $cartResult->setType(ResultInterface::TYPE_TIME_SERIES_NUMERIC);
+        $result->setLimit($minNumberOfActiveProduct);
+        $result->setObservedValue($activeProductCount);
+        $result->setObservedValueUnit('products');
+        $result->setObservedValuePrecision(0);
+        $result->setLimitType(ResultInterface::LIMIT_TYPE_MIN);
+        $result->setType(ResultInterface::TYPE_TIME_SERIES_NUMERIC);
 
-        return $cartResult;
+        return $result;
     }
 
     /**

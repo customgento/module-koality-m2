@@ -6,11 +6,9 @@ namespace Koality\MagentoPlugin\Api;
 
 interface ResultInterface
 {
-    public const KEY_NEWSLETTER_TOO_FEW = 'newsletter.too_few';
     public const KEY_ORDERS_TOO_FEW = 'orders.too_few';
     public const KEY_CARTS_OPEN_TOO_MANY = 'carts.open.too_many';
     public const KEY_PRODUCTS_ACTIVE = 'products.active';
-    public const KEY_PLUGINS_UPDATABLE = 'plugins.updatable';
     public const STATUS_PASS = 'pass';
     public const STATUS_FAIL = 'fail';
     public const LIMIT_TYPE_MIN = 'min';

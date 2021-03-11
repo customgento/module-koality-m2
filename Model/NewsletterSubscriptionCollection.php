@@ -40,11 +40,17 @@ class NewsletterSubscriptionCollection
         }
 
         if ($newsletterSubscriptions < $minNewsletterSubscriptions) {
-            $newsletterResult = new Result(ResultInterface::STATUS_FAIL, ResultInterface::KEY_NEWSLETTER_TOO_FEW,
-                'There were too few newsletter subscriptions yesterday.');
+            $newsletterResult = new Result(
+                ResultInterface::STATUS_FAIL,
+                ResultInterface::KEY_NEWSLETTER_TOO_FEW,
+                'There were too few newsletter subscriptions yesterday.'
+            );
         } else {
-            $newsletterResult = new Result(ResultInterface::STATUS_PASS, ResultInterface::KEY_NEWSLETTER_TOO_FEW,
-                'There were enough newsletter subscriptions yesterday.');
+            $newsletterResult = new Result(
+                ResultInterface::STATUS_PASS,
+                ResultInterface::KEY_NEWSLETTER_TOO_FEW,
+                'There were enough newsletter subscriptions yesterday.'
+            );
         }
 
         $newsletterResult->setLimit($minNewsletterSubscriptions);
@@ -57,6 +63,7 @@ class NewsletterSubscriptionCollection
         return $newsletterResult;
     }
 
+    //TODO check how to get newsletter subscribers because tehre is no created_at row in the DB
     private function getNewsletterRegistrations(): int
     {
         $orderTo   = date("Y-m-d H:i:s");
@@ -72,6 +79,5 @@ class NewsletterSubscriptionCollection
         }
 
         return $subscriberSize;
-
     }
 }

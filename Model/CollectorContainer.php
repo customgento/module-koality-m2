@@ -9,8 +9,6 @@ use Koality\MagentoPlugin\Model\Config;
 use Koality\MagentoPlugin\Model\CountOrdersCollector;
 use Koality\MagentoPlugin\Model\ActiveProductsCollector;
 use Koality\MagentoPlugin\Model\OpenCartsCollector;
-use Koality\MagentoPlugin\Model\NewsletterSubscriptionCollection;
-use Magento\Framework\Controller\Result\JsonFactory;
 
 class CollectorContainer
 {
@@ -29,38 +27,23 @@ class CollectorContainer
      */
     private $openCartsCollector;
 
-    /**
-     * @var NewsletterSubscriptionCollection
-     */
-    private $newsletterSubscriptionCollection;
-
-    /**
-     * @var JsonFactory
-     */
-    private $resultJsonFactory;
-
     public function __construct(
         CountOrdersCollector $countOrderCollector,
         ActiveProductsCollector $activeProductsCollector,
-        OpenCartsCollector $openCartsCollector,
-        NewsletterSubscriptionCollection $newsletterSubscriptionCollection,
-        JsonFactory $resultJsonFactory
+        OpenCartsCollector $openCartsCollector
     ) {
         $this->countOrderCollector              = $countOrderCollector;
         $this->activeProductsCollector          = $activeProductsCollector;
         $this->openCartsCollector               = $openCartsCollector;
-        $this->newsletterSubscriptionCollection = $newsletterSubscriptionCollection;
-        $this->resultJsonFactory                = $resultJsonFactory;
     }
 
     public function run(): KoalityFormatter
     {
-        $formatter  = new KoalityFormatter($this->resultJsonFactory);
+        $formatter  = new KoalityFormatter();
         $collectors = [
             $this->countOrderCollector->getResult(),
             $this->activeProductsCollector->getAllProducts(),
-            $this->openCartsCollector->getResult(),
-            $this->newsletterSubscriptionCollection->getResult()
+            $this->openCartsCollector->getResult()
         ];
 
         foreach ($collectors as $collector) {

@@ -5,25 +5,13 @@ declare(strict_types=1);
 namespace Koality\MagentoPlugin\Model\Formatter;
 
 use Koality\MagentoPlugin\Api\ResultInterface;
-use Magento\Framework\Controller\Result\Json;
-use Magento\Framework\Controller\Result\JsonFactory;
 
 class KoalityFormatter
 {
     /**
-     * @var JsonFactory
-     */
-    private $resultJsonFactory;
-
-    /**
      * @var ResultInterface[]
      */
     private $results;
-
-    public function __construct(JsonFactory $resultJsonFactory)
-    {
-        $this->resultJsonFactory = $resultJsonFactory;
-    }
 
     /**
      * Add a new result.
@@ -40,9 +28,9 @@ class KoalityFormatter
     /**
      * Return an IETF conform result array with all sub results.
      *
-     * @return Json
+     * @return array
      */
-    public function getFormattedResults(): Json
+    public function getFormattedResults(): array
     {
         $formattedResult = [];
         $checks          = [];
@@ -95,8 +83,7 @@ class KoalityFormatter
         $formattedResult['checks'] = $checks;
         $formattedResult['info']   = $this->getInfoBlock();
 
-        return $this->resultJsonFactory->create()
-            ->setData($formattedResult);
+        return $formattedResult;
     }
 
     /**
