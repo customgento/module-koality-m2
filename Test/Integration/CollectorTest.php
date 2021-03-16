@@ -38,7 +38,7 @@ class CollectorTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture current_store koality/active_products/active_products 2000
+     * @magentoConfigFixture current_store koality/active_products/active_products 1
      */
     public function testActiveProductsCollectorReturnsSuccessBasedOnActiveProducts(): void
     {
