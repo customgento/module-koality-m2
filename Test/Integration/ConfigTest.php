@@ -23,25 +23,25 @@ class ConfigTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture koality/rush_hour/rush_hour_begin 10:00
+     * @magentoConfigFixture current_store koality/rush_hour/rush_hour_begin 10:00
      */
     public function testRetrieveRushHourBegin(): void
     {
-        self::assertEquals('10:10', $this->config->getRushHourBegin());
+        self::assertEquals('10:00', $this->config->getRushHourBegin());
     }
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture koality/rush_hour/rush_hour_end 17:00
+     * @magentoConfigFixture current_store koality/rush_hour/rush_hour_end 10:00
      */
     public function testRetrieveRushHourEnd(): void
     {
-        self::assertEquals('17:00', $this->config->getRushHourBegin());
+        self::assertEquals('10:00', $this->config->getRushHourEnd());
     }
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture koality/rush_hour/orders_per_hour_rushHour 50
+     * @magentoConfigFixture current_store koality/rush_hour/orders_per_hour_rushHour 50
      */
     public function testOrdersPerRushHour(): void
     {
@@ -50,7 +50,7 @@ class ConfigTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture koality/rush_hour/include_weekends 1
+     * @magentoConfigFixture current_store koality/rush_hour/include_weekends 1
      */
     public function testRushHourIncludedWeekend(): void
     {
@@ -59,7 +59,7 @@ class ConfigTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture koality/opening_hours/orders_per_hour_normal 10
+     * @magentoConfigFixture current_store koality/opening_hours/orders_per_hour_normal 10
      */
     public function testOrdersPerHourNormal(): void
     {
@@ -68,7 +68,7 @@ class ConfigTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture koality/open_carts/open_carts 10
+     * @magentoConfigFixture current_store koality/open_carts/open_carts 10
      */
     public function testOpenCartsExists(): void
     {
@@ -77,7 +77,7 @@ class ConfigTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture koality/active_products/active_products 100
+     * @magentoConfigFixture current_store koality/active_products/active_products 100
      */
     public function testGetActiveProducts(): void
     {
