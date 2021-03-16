@@ -8,6 +8,8 @@ use Koality\MagentoPlugin\Api\ResultInterface;
 use Koality\MagentoPlugin\Model\ActiveProductsCollector;
 use Koality\MagentoPlugin\Model\CountOrdersCollector;
 use Koality\MagentoPlugin\Model\OpenCartsCollector;
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Catalog\Model\Product;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 
@@ -38,10 +40,17 @@ class CollectorTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture current_store koality/active_products/active_products 1
+     * @magentoDataFixture   Magento/Catalog/_files/product_simple.php
+     * @magentoDataFixture   Magento/Sales/_files/order_with_customer_and_multiple_order_items.php
+     * @magentoConfigFixture current_store koality/active_products/active_products 3
      */
     public function testActiveProductsCollectorReturnsSuccessBasedOnActiveProducts(): void
     {
+        /** @var ProductRepositoryInterface $productRepository */
+        $productRepository = Bootstrap::getObjectManager()->create(ProductRepositoryInterface::class);
+        $id                = $productRepository->get('simple1')->getId();
+        $product           = Bootstrap::getObjectManager()->create(Product::class);
+        $product->load($id);
         $result = $this->activeProductsCollector->getAllProducts();
         self::assertEquals(
             ResultInterface::STATUS_PASS,
@@ -51,10 +60,17 @@ class CollectorTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture current_store koality/active_products/active_products 3000
+     * @magentoDataFixture   Magento/Catalog/_files/product_simple.php
+     * @magentoDataFixture   Magento/Sales/_files/order_with_customer_and_multiple_order_items.php
+     * @magentoConfigFixture current_store koality/active_products/active_products 5
      */
     public function testActiveProductsCollectorReturnsErrorBasedOnActiveProducts(): void
     {
+        /** @var ProductRepositoryInterface $productRepository */
+        $productRepository = Bootstrap::getObjectManager()->create(ProductRepositoryInterface::class);
+        $id                = $productRepository->get('simple1')->getId();
+        $product           = Bootstrap::getObjectManager()->create(Product::class);
+        $product->load($id);
         $result = $this->activeProductsCollector->getAllProducts();
         self::assertEquals(
             ResultInterface::STATUS_FAIL,
