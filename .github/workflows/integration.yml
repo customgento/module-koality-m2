@@ -4,6 +4,9 @@ on: [push, pull_request]
 jobs:
   integration-tests:
     name: Magento 2 Integration Tests
+    strategy:
+     matrix:
+      version: ['2.3.5-p2', '2.3.6-p1', '2.4.2-p1', '2.4.2' ]
     runs-on: ubuntu-20.04
     services:
       mysql:
@@ -29,4 +32,4 @@ jobs:
         with:
           module_name: Koality_MagentoPlugin
           composer_name: customgento/module-koality-m2
-          ce_version: '2.4.1'
+          ce_version: ${{ matrix.version }}
