@@ -79,7 +79,6 @@ class CollectorTest extends TestCase
         );
     }
 
-
     /**
      * @magentoAppIsolation  enabled
      * @magentoConfigFixture current_store koality/rush_hour/rush_hour_begin 00,00,00
