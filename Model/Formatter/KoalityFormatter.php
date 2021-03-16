@@ -37,41 +37,7 @@ class KoalityFormatter
         $status          = ResultInterface::STATUS_PASS;
 
         foreach ($this->results as $result) {
-            $check = [
-                'status' => $result->getStatus(),
-                'output' => $result->getMessage()
-            ];
-
-            if (is_numeric($result->getLimit())) {
-                $check['limit'] = $result->getLimit();
-            }
-
-            if ($result->getLimitType() !== null) {
-                $check['limitType'] = $result->getLimitType();
-            }
-
-            if ($result->getObservedValue() !== null) {
-                $check['observedValue'] = $result->getObservedValue();
-            }
-
-            if ($result->getObservedValueUnit() !== null) {
-                $check['observedUnit'] = $result->getObservedValueUnit();
-            }
-
-            if ($result->getObservedValuePrecision() !== null) {
-                $check['observedValuePrecision'] = $result->getObservedValuePrecision();
-            }
-
-            if ($result->getType() !== null) {
-                $check['metricType'] = $result->getType();
-            }
-
-            $attributes = $result->getAttributes();
-            if (count($attributes) > 0) {
-                $check['attributes'] = $attributes;
-            }
-
-            $checks[$result->getKey()] = $check;
+            $checks = $this->setChecks($result, $checks);
 
             if ($result->getStatus() === ResultInterface::STATUS_FAIL) {
                 $status = ResultInterface::STATUS_FAIL;
@@ -112,5 +78,52 @@ class KoalityFormatter
             'version'    => '1.0.0',
             'plugin_url' => 'https://www.koality.io/plugins/magento'
         ];
+    }
+
+    /**
+     * @param ResultInterface $result
+     * @param array           $checks
+     *
+     * @return array
+     */
+    private function setChecks(ResultInterface $result, array $checks): array
+    {
+        $check = [
+            'status' => $result->getStatus(),
+            'output' => $result->getMessage()
+        ];
+
+        if (is_numeric($result->getLimit())) {
+            $check['limit'] = $result->getLimit();
+        }
+
+        if ($result->getLimitType() !== null) {
+            $check['limitType'] = $result->getLimitType();
+        }
+
+        if ($result->getObservedValue() !== null) {
+            $check['observedValue'] = $result->getObservedValue();
+        }
+
+        if ($result->getObservedValueUnit() !== null) {
+            $check['observedUnit'] = $result->getObservedValueUnit();
+        }
+
+        if ($result->getObservedValuePrecision() !== null) {
+            $check['observedValuePrecision'] = $result->getObservedValuePrecision();
+        }
+
+        if ($result->getType() !== null) {
+            $check['metricType'] = $result->getType();
+        }
+
+        $attributes = $result->getAttributes();
+        if (count($attributes) > 0) {
+            $check['attributes'] = $attributes;
+        }
+
+        $checks[$result->getKey()] = $check;
+
+        return $checks;
     }
 }
