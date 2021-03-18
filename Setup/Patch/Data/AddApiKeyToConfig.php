@@ -8,6 +8,7 @@ use Koality\MagentoPlugin\Model\Config as KoalityConfig;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Framework\Setup\Patch\PatchRevertableInterface;
+use Koality\MagentoPlugin\Model\ApiKey;
 
 class AddApiKeyToConfig implements DataPatchInterface, PatchRevertableInterface
 {
@@ -16,9 +17,15 @@ class AddApiKeyToConfig implements DataPatchInterface, PatchRevertableInterface
      */
     private $moduleDataSetup;
 
-    public function __construct(ModuleDataSetupInterface $moduleDataSetup)
+    /**
+     * @var ApiKey
+     */
+    private $apiKey;
+
+    public function __construct(ModuleDataSetupInterface $moduleDataSetup, ApiKey $apiKey)
     {
         $this->moduleDataSetup = $moduleDataSetup;
+        $this->apiKey          = $apiKey;
     }
 
     public function apply(): void
@@ -27,23 +34,8 @@ class AddApiKeyToConfig implements DataPatchInterface, PatchRevertableInterface
             $this->moduleDataSetup->getTable('core_config_data'),
             [
                 'path'  => KoalityConfig::KOALITY_API_KEY,
-                'value' => $this->createGuid()
+                'value' => $this->apiKey->createRandomApiKey()
             ]
-        );
-    }
-
-    private function createGuid(): string
-    {
-        return sprintf(
-            '%04X%04X-%04X-%04X-%04X-%04X%04X%04X',
-            random_int(0, 65535),
-            random_int(0, 65535),
-            random_int(0, 65535),
-            random_int(16384, 20479),
-            random_int(32768, 49151),
-            random_int(0, 65535),
-            random_int(0, 65535),
-            random_int(0, 65535)
         );
     }
 

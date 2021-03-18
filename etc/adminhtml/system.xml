@@ -12,6 +12,10 @@
                         backend.
                     </comment>
                 </field>
+                <field id="api_refresh_button" translate="label" type="button" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Refresh the koality.io API key</label>
+                    <frontend_model>Koality\MagentoPlugin\Block\System\Config\Button</frontend_model>
+                </field>
             </group>
             <group id="rush_hour" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Rush hour</label>
