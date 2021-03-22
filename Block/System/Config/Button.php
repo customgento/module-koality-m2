@@ -33,14 +33,6 @@ class Button extends Field
         return $this;
     }
 
-    public function render(AbstractElement $element): string
-    {
-
-        $element->unsScope()->unsCanUseWebsiteValue()->unsCanUseDefaultValue();
-
-        return parent::render($element);
-    }
-
     protected function _getElementHtml(AbstractElement $element)
     {
         $this->addData([

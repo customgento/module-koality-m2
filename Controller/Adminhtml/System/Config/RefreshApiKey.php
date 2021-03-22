@@ -12,7 +12,8 @@ use Magento\Framework\App\Config\Storage\WriterInterface;
 
 class RefreshApiKey extends Action
 {
-    //TODO add admin resource
+    public const ADMIN_RESOURCE = 'Koality_MagentoPlugin::ApiKey';
+
     /**
      * @var ApiKey
      */

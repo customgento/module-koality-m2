@@ -74,7 +74,7 @@ class KoalityFormatter
     private function getInfoBlock(): array
     {
         return [
-            'creator'    => 'koality.io Magento Plugin',
+            'creator'    => 'koality.io Magento 2 Plugin',
             'version'    => '1.0.0',
             'plugin_url' => 'https://www.koality.io/plugins/magento'
         ];
