@@ -33,7 +33,7 @@ class AddApiKeyToConfig implements DataPatchInterface, PatchRevertableInterface
         $this->moduleDataSetup->getConnection()->insert(
             $this->moduleDataSetup->getTable('core_config_data'),
             [
-                'path'  => KoalityConfig::KOALITY_API_KEY,
+                'path'  => KoalityConfig::API_KEY,
                 'value' => $this->apiKey->createRandomApiKey()
             ]
         );

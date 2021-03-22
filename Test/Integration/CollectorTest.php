@@ -42,7 +42,7 @@ class CollectorTest extends TestCase
      * @magentoAppIsolation  enabled
      * @magentoDataFixture   Magento/Catalog/_files/product_simple.php
      * @magentoDataFixture   Magento/Sales/_files/order_with_customer_and_multiple_order_items.php
-     * @magentoConfigFixture current_store koality/active_products/active_products 3
+     * @magentoConfigFixture current_store koality/active_products/min_number 3
      */
     public function testActiveProductsCollectorReturnsSuccessBasedOnActiveProducts(): void
     {
@@ -62,7 +62,7 @@ class CollectorTest extends TestCase
      * @magentoAppIsolation  enabled
      * @magentoDataFixture   Magento/Catalog/_files/product_simple.php
      * @magentoDataFixture   Magento/Sales/_files/order_with_customer_and_multiple_order_items.php
-     * @magentoConfigFixture current_store koality/active_products/active_products 5
+     * @magentoConfigFixture current_store koality/active_products/min_number 5
      */
     public function testActiveProductsCollectorReturnsErrorBasedOnActiveProducts(): void
     {
@@ -81,10 +81,10 @@ class CollectorTest extends TestCase
     /**
      * @magentoAppIsolation  enabled
      * @magentoDataFixture   Magento/Sales/_files/order_with_customer_and_multiple_order_items.php
-     * @magentoConfigFixture current_store koality/rush_hour/rush_hour_begin 00,00,00
-     * @magentoConfigFixture current_store koality/rush_hour/rush_hour_end 23,59,00
+     * @magentoConfigFixture current_store koality/rush_hour/begin 00,00,00
+     * @magentoConfigFixture current_store koality/rush_hour/end 23,59,00
      * @magentoConfigFixture current_store koality/rush_hour/include_weekends 1
-     * @magentoConfigFixture current_store koality/rush_hour/orders_per_hour_rushHour 50
+     * @magentoConfigFixture current_store koality/rush_hour/orders_per_rush_hour 50
      */
     public function testCountOrdersCollectorReturnsFalseBasedOnSalesThreshold(): void
     {
@@ -98,10 +98,10 @@ class CollectorTest extends TestCase
     /**
      * @magentoAppIsolation  enabled
      * @magentoDataFixture   Magento/Sales/_files/order_with_customer_and_multiple_order_items.php
-     * @magentoConfigFixture current_store koality/rush_hour/rush_hour_begin 00,00,00
-     * @magentoConfigFixture current_store koality/rush_hour/rush_hour_end 23,59,00
+     * @magentoConfigFixture current_store koality/rush_hour/begin 00,00,00
+     * @magentoConfigFixture current_store koality/rush_hour/end 23,59,00
      * @magentoConfigFixture current_store koality/rush_hour/include_weekends 1
-     * @magentoConfigFixture current_store koality/rush_hour/orders_per_hour_rushHour 1
+     * @magentoConfigFixture current_store koality/rush_hour/orders_per_rush_hour 1
      */
     public function testCountOrdersCollectorReturnsTrueBasedOnSalesThreshold(): void
     {
@@ -114,7 +114,7 @@ class CollectorTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture current_store koality/open_carts/open_carts 10
+     * @magentoConfigFixture current_store koality/open_carts/max_number 10
      */
     public function testOpenCartCollectorReturnsTrueBasedOnMaxCartCount(): void
     {
@@ -127,7 +127,7 @@ class CollectorTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture current_store koality/open_carts/open_carts -1
+     * @magentoConfigFixture current_store koality/open_carts/max_number -1
      */
     public function testOpenCartCollectorReturnsFalseBasedOnMaxCartCount(): void
     {

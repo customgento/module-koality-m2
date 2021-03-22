@@ -23,7 +23,7 @@ class ConfigTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture current_store koality/rush_hour/rush_hour_begin 10:00
+     * @magentoConfigFixture current_store koality/rush_hour/begin 10:00
      */
     public function testRetrieveRushHourBegin(): void
     {
@@ -32,7 +32,7 @@ class ConfigTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture current_store koality/rush_hour/rush_hour_end 10:00
+     * @magentoConfigFixture current_store koality/rush_hour/end 10:00
      */
     public function testRetrieveRushHourEnd(): void
     {
@@ -41,7 +41,7 @@ class ConfigTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture current_store koality/rush_hour/orders_per_hour_rushHour 50
+     * @magentoConfigFixture current_store koality/rush_hour/orders_per_rush_hour 50
      */
     public function testOrdersPerRushHour(): void
     {
@@ -68,7 +68,7 @@ class ConfigTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture current_store koality/open_carts/open_carts 10
+     * @magentoConfigFixture current_store koality/open_carts/max_number 10
      */
     public function testOpenCartsExists(): void
     {
@@ -77,7 +77,7 @@ class ConfigTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture current_store koality/active_products/active_products 100
+     * @magentoConfigFixture current_store koality/active_products/min_number 100
      */
     public function testGetActiveProducts(): void
     {

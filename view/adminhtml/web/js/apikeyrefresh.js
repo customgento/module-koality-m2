@@ -21,9 +21,9 @@ define([
                 data: {form_key: FORM_KEY}
             }).done(function (response) {
                 let newApiKey = response;
-                let valueElement = document.querySelector('#row_koality_api_key_api_key .value')
-                let oldApiKey = valueElement.innerHTML.match('.+?(?=<p)')
-                valueElement.innerHTML = valueElement.innerHTML.replace(oldApiKey, newApiKey)
+                let valueElement = document.querySelector('#row_koality_api_key .value');
+                let oldApiKey = valueElement.innerHTML.match('.+?(?=<p)');
+                valueElement.innerHTML = valueElement.innerHTML.replace(oldApiKey, newApiKey);
             })
         }
     });

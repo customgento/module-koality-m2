@@ -23,8 +23,6 @@ class RefreshApiKey extends Action
      */
     private $configWriter;
 
-    protected $resultFactory;
-
     public function __construct(
         Context $context,
         ApiKey $apiKey,
@@ -38,7 +36,7 @@ class RefreshApiKey extends Action
     public function execute(): void
     {
         $newApiKey = $this->apiKey->createRandomApiKey();
-        $this->configWriter->save(Config::KOALITY_API_KEY, $newApiKey);
+        $this->configWriter->save(Config::API_KEY, $newApiKey);
         $this->getResponse()->setBody($newApiKey);
     }
 }

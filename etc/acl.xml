@@ -4,7 +4,7 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="Magento_Backend::system">
-                    <resource id="Koaliuty_MagentoPlugin::Koality" title="Koality Configuration">
+                    <resource id="Koaliuty_MagentoPlugin::Koality" title="koality.io Configuration">
                         <resource id="Koaliuty_MagentoPlugin::Koality_status" sortOrder="10" title="Show Status"/>
                     </resource>
                 </resource>
