@@ -5,14 +5,8 @@ jobs:
     name: Magento 2 Integration Tests
     strategy:
       matrix:
-        php-version:
-          - extdn/github-actions-m2/magento-integration-tests/7.3@master
-          - extdn/github-actions-m2/magento-integration-tests/7.4@master
-        version:
-          - "2.3.6"
-          - "2.3.6-p1"
-          - "2.4.1-p1"
-          - "2.4.2"
+        php-version: [ extdn/github-actions-m2/magento-integration-tests/7.3@master, extdn/github-actions-m2/magento-integration-tests/7.4@master ]
+        version: [ "2.3.6","2.3.6-p1","2.4.1-p1", "2.4.2" ]
         exclude:
           - php-version: extdn/github-actions-m2/magento-integration-tests/7.3@master
             version: [ "2.4.1-p1", "2.4.2" ]
