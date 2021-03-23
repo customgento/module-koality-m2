@@ -4,9 +4,9 @@
 This plugin can be used to continuously monitor a Magento2 shop for business metrics.
 
 ## Layout in koality.io backend
-![Active products](docs/images/active_products.png "Active products")
-![Open carts](docs/images/open_carts.png "Open carts")
-![Orders per hour](docs/images/orders_per_hour.png "Orders per hour")
+![Active products](images/active_products.png "Active products")
+![Open carts](images/open_carts.png "Open carts")
+![Orders per hour](images/orders_per_hour.png "Orders per hour")
 
 ## Metrics
 
@@ -94,25 +94,25 @@ To configure the plugin, navigate in your Magento admin panel to Stores -> Confi
 There you find the automatically created API key, which must be inserted in the koality.io backend. It is also possible 
 to create a new key using the `Refresh API Key` button, if needed.
 
-![API key configuration](docs/images/api_key_config.png "API key configuration")
+![API key configuration](images/api_key_config.png "API key configuration")
 
 
 In the next tab you can define the settings for the orders-per-hour metric.
 Define a rush hour, if needed, and set the minimal quantity of orders per hour, you expect.
 The metric will fail, as soon as the number of orders falls below this limit.
 
-![Orders per hour config](docs/images/orders_per_hour_config.png "Orders per hour config")
+![Orders per hour config](images/orders_per_hour_config.png "Orders per hour config")
 
 
 In the section for open carts you can set the maximal quantity of open carts. The metric fails, as soon as there are more open carts than expected.
 
-![Open carts config](docs/images/open_carts_config.png "Open carts config")
+![Open carts config](images/open_carts_config.png "Open carts config")
 
 
 In the last tab it is possible to enter a minimal expectation for active products.
 If there are less active products, then entered here, the metric will fail in the koality.io backend.
 
-![Active products config](docs/images/active_products_config.png "Active products config")
+![Active products config](images/active_products_config.png "Active products config")
 
 ## Support
 If you have any issues with this extension, please open a [GitHub issue](https://github.com/customgento/module-koality-m2/issues/new). If you have any issues with koality.io, please contact the koality.io support.
