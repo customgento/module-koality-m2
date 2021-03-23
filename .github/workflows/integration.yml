@@ -1,5 +1,5 @@
 name: ExtDN M2 Integration Tests
-on: [push, pull_request]
+on: [ push, pull_request ]
 jobs:
   integration-tests:
     name: Magento 2 Integration Tests
@@ -15,9 +15,9 @@ jobs:
           - "2.4.2"
         exclude:
           - php-version: extdn/github-actions-m2/magento-integration-tests/7.3@master
-            version: ["2.4.1-p1", "2.4.2"]
+            version: [ "2.4.1-p1", "2.4.2" ]
           - php-version: extdn/github-actions-m2/magento-integration-tests/7.4@master
-            version: ["2.3.6", "2.3.6-p1"]
+            version: [ "2.3.6", "2.3.6-p1" ]
     runs-on: ubuntu-latest
     services:
       mysql:
@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: M2 Integration Tests with Magento Version ${{ matrix.version }} and ${{ matrix.php_version }}
-        uses: ${{ matrix.php_version }}
+      - uses: ${{ matrix.php_version }}
         with:
           module_name: Koality_MagentoPlugin
           composer_name: customgento/module-koality-m2
