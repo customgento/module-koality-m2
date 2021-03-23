@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: M2 Integration Tests with Magento Version ${{ matrix.version }} and ${{ matrix.php_version }}
-      - uses: ${{ matrix.php_version }}
+      - run: ${{ matrix.php_version }}
         with:
           module_name: Koality_MagentoPlugin
           composer_name: customgento/module-koality-m2
