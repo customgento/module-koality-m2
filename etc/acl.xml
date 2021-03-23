@@ -4,7 +4,7 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="Magento_Backend::system">
-                    <resource id="Koaliuty_MagentoPlugin::Configuration" title="Koality Configuration" sortOrder="10">
+                    <resource id="Koality_MagentoPlugin::Configuration" title="koality.io Configuration" sortOrder="10">
                         <resource id="Koality_MagentoPlugin::ApiKey" title="Koality API Key" sortOrder="10"/>
                     </resource>
                 </resource>
