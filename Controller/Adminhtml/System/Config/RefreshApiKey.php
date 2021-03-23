@@ -9,6 +9,7 @@ use Koality\MagentoPlugin\Model\Config;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Config\Storage\WriterInterface;
+use Magento\Framework\App\ResponseInterface;
 
 class RefreshApiKey extends Action
 {
@@ -34,10 +35,11 @@ class RefreshApiKey extends Action
         $this->configWriter = $configWriter;
     }
 
-    public function execute()
+    public function execute(): ResponseInterface
     {
         $newApiKey = $this->apiKey->createRandomApiKey();
         $this->configWriter->save(Config::API_KEY, $newApiKey);
-        $this->getResponse()->setBody($newApiKey);
+
+        return $this->getResponse()->setBody($newApiKey);
     }
 }
