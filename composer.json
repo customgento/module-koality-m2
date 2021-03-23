@@ -23,7 +23,7 @@
       "registration.php"
     ],
     "psr-4": {
-      "Koality\\MagentoPlugin\\": ""
+      "Koality\\MagentoPlugin\\": "src/"
     }
   }
 }
