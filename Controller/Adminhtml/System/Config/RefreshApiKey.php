@@ -34,7 +34,7 @@ class RefreshApiKey extends Action
         $this->configWriter = $configWriter;
     }
 
-    public function execute(): void
+    public function execute()
     {
         $newApiKey = $this->apiKey->createRandomApiKey();
         $this->configWriter->save(Config::API_KEY, $newApiKey);
