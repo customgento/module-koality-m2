@@ -85,5 +85,4 @@ class ControllerApiTest extends AbstractBackendController
         $this->uri .= '?isAjax=true';
         parent::testAclNoAccess();
     }
-
 }
