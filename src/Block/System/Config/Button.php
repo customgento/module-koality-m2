@@ -9,9 +9,6 @@ use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\UrlInterface;
 
-/**
- * @SuppressWarnings(PHPMD)
- */
 class Button extends Field
 {
     /**
@@ -32,7 +29,9 @@ class Button extends Field
 
         return $this;
     }
-
+    /**
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
+     */
     protected function _getElementHtml(AbstractElement $element)
     {
         $this->addData([
