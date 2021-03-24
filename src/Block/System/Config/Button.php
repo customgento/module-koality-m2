@@ -29,8 +29,9 @@ class Button extends Field
 
         return $this;
     }
+
     /**
-     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
+     * @SuppressWarnings("PHPMD.UnusedFormalParameter")
      */
     protected function _getElementHtml(AbstractElement $element)
     {
