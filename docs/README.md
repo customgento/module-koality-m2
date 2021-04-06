@@ -14,7 +14,10 @@ The following metrics are currently implemented:
 
 - **Minimum orders per hour** - this check fails if the number of orders within the last hour falls under a given threshold. The check provides two time intervals. Rush hour and normal shopping time. This is needed to minimize false positives.
 
-- **Maximum number of open carts** - fails if there are to many open carts. This often happens if the payment fails, and the customers can't finish the buying process.
+
+-  **Maximum number of open carts** - fails if there are to many open carts in the last hour. This check also includes a distinction between rush hours and normal shopping hours.
+   This often happens if the payment fails, and the customers can't finish the buying process.
+
 
 - **Minimum number of active products** - this check fails if there are not enough active products in the should. This will help find import errors.
 
@@ -97,14 +100,20 @@ to create a new key using the `Refresh API Key` button, if needed.
 ![API key configuration](images/api_key_config.png "API key configuration")
 
 
-In the next tab you can define the settings for the orders-per-hour metric.
-Define a rush hour, if needed, and set the minimal quantity of orders per hour, you expect.
+In the next tab you can define a rush hour if needed.
+The times should always be chosen in the local timezone.
+![Rush hour config](images/rush_hour_config.png "Rush hour config")
+
+In the third tab you can define the settings for the orders-per-hour metric.
+Set the minimal quantity of orders per hour, you expect and also define a value for the rush hour, if needed.
 The metric will fail, as soon as the number of orders falls below this limit.
 
 ![Orders per hour config](images/orders_per_hour_config.png "Orders per hour config")
 
 
-In the section for open carts you can set the maximal quantity of open carts. The metric fails, as soon as there are more open carts than expected.
+In the section for open carts you can set the maximal quantity of open carts.
+Here it is also possible to define a value for the rush hour, if needed.
+The metric fails, as soon as there are more open carts than expected.
 
 ![Open carts config](images/open_carts_config.png "Open carts config")
 
