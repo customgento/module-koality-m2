@@ -41,11 +41,11 @@ class ConfigTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture current_store koality/rush_hour/orders_per_rush_hour 50
+     * @magentoConfigFixture current_store koality/orders_per_hour/min_orders_per_rush_hour 50
      */
-    public function testOrdersPerRushHour(): void
+    public function testMinOrdersPerRushHour(): void
     {
-        self::assertEquals(50, $this->config->getOrdersPerRushHour());
+        self::assertEquals(50, $this->config->getMinOrdersPerRushHour());
     }
 
     /**
@@ -59,20 +59,20 @@ class ConfigTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture current_store koality/opening_hours/orders_per_hour_normal 10
+     * @magentoConfigFixture current_store 'koality/orders_per_hour/min_orders_per_normal_hour 10
      */
-    public function testOrdersPerHourNormal(): void
+    public function testMinOrdersPerHourNormal(): void
     {
-        self::assertEquals(10, $this->config->getOrdersPerHourNormal());
+        self::assertEquals(10, $this->config->getMinOrdersPerHourNormal());
     }
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture current_store koality/open_carts/max_number 10
+     * @magentoConfigFixture current_store koality/open_carts/max_open_carts_per_normal_hour 10
      */
-    public function testOpenCartsExists(): void
+    public function testMaxOpenCartsPerNormalHour(): void
     {
-        self::assertEquals(10, $this->config->getOpenCarts());
+        self::assertEquals(10, $this->config->getMaxOpenCartsPerNormalHour());
     }
 
     /**
@@ -82,5 +82,14 @@ class ConfigTest extends TestCase
     public function testGetActiveProducts(): void
     {
         self::assertEquals(100, $this->config->getActiveProducts());
+    }
+
+    /**
+     * @magentoAppIsolation  enabled
+     * @magentoConfigFixture current_store koality/open_carts/max_open_carts_per_rush_hour 100
+     */
+    public function testMaxOpenCartsPerRushHour(): void
+    {
+        self::assertEquals(100, $this->config->getMaxOpenCartsPerNormalRushHour());
     }
 }

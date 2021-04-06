@@ -9,7 +9,7 @@ use Koality\MagentoPlugin\Model\Config;
 use Koality\MagentoPlugin\Model\Formatter\Result;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Sales\Api\OrderRepositoryInterface;
-use Magento\Framework\Stdlib\DateTime\DateTime;
+use Koality\MagentoPlugin\Model\RushHour;
 
 class CountOrdersCollector
 {
@@ -24,25 +24,25 @@ class CountOrdersCollector
     private $orderRepository;
 
     /**
+     * @var RushHour
+     */
+    private $rushHour;
+
+    /**
      * @var Config
      */
     private $config;
-
-    /**
-     * @var DateTime
-     */
-    private $date;
 
     public function __construct(
         SearchCriteriaBuilder $searchCriteriaBuilder,
         OrderRepositoryInterface $orderRepository,
         Config $config,
-        DateTime $date
+        RushHour $rushHour
     ) {
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->orderRepository       = $orderRepository;
         $this->config                = $config;
-        $this->date                  = $date;
+        $this->rushHour              = $rushHour;
     }
 
     public function getResult(): ResultInterface
@@ -84,11 +84,11 @@ class CountOrdersCollector
         $currentWeekDay = date('w');
         $isWeekend      = ($currentWeekDay === 0 || $currentWeekDay === 6);
         $allowRushHour  = !($isWeekend && !$this->config->doesRushHourHappenWeekends());
-        if ($allowRushHour && $this->isRushHour()) {
-            return (int)$this->config->getOrdersPerRushHour();
+        if ($allowRushHour && $this->rushHour->isRushHour()) {
+            return (int)$this->config->getMinOrdersPerRushHour();
         }
 
-        return (int)$this->config->getOrdersPerHourNormal();
+        return (int)$this->config->getMinOrdersPerHourNormal();
     }
 
     /**
@@ -105,18 +105,5 @@ class CountOrdersCollector
             ->addFilter('created_at', $orderTo, 'lteq')->create();
 
         return $this->orderRepository->getList($searchCriteria)->getTotalCount();
-    }
-
-    private function isRushHour(): bool
-    {
-        $timeStamp              = $this->date->gmtTimestamp();
-        $beginRushHourTimeArray = explode(',', $this->config->getRushHourBegin());
-        $beginRushHourTimestamp = strtotime($beginRushHourTimeArray[0] . ':' . $beginRushHourTimeArray[1] . ':'
-            . $beginRushHourTimeArray[2]);
-        $endRushHourTimeArray   = explode(',', $this->config->getRushHourEnd());
-        $endRushHourTimestamp   = strtotime($endRushHourTimeArray[0] . ':' . $endRushHourTimeArray[1] . ':'
-            . $endRushHourTimeArray[2]);
-
-        return $timeStamp > $beginRushHourTimestamp && $timeStamp < $endRushHourTimestamp;
     }
 }

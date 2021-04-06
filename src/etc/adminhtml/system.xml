@@ -23,29 +23,32 @@
                 <field id="end" translate="label" type="time" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>When does your rush hour end?</label>
                 </field>
-                <field id="orders_per_rush_hour" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>How many orders do you at least expect every hour in the rush hour?</label>
-                </field>
                 <field id="include_weekends" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Does the rush hour also happen on the weekend?</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
             </group>
-            <group id="opening_hours" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="orders_per_hour" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Opening hours</label>
-                <field id="orders_per_hour_normal" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="min_orders_per_normal_hour" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>How many orders do you at least expect every hour outside the rush hour?</label>
+                </field>
+                <field id="min_orders_per_rush_hour" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>How many orders do you at least expect every hour in the rush hour?</label>
                 </field>
             </group>
             <group id="open_carts" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Open carts</label>
-                <field id="max_number" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="max_open_carts_per_normal_hour" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>How many open carts may exist?</label>
+                </field>
+                <field id="max_open_carts_per_rush_hour" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>How many open carts may exist in the rush hour?</label>
                 </field>
             </group>
             <group id="active_products" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Active products</label>
-                <field id="min_number" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="min_active_products" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>How many active products must at least exist?</label>
                 </field>
             </group>

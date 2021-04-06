@@ -9,6 +9,7 @@ use Koality\MagentoPlugin\Model\Formatter\Result;
 use Koality\MagentoPlugin\Model\Config;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\ResourceModel\Quote\CollectionFactory as QuoteCollectionFactory;
+use Koality\MagentoPlugin\Model\RushHour;
 
 class OpenCartsCollector
 {
@@ -22,19 +23,29 @@ class OpenCartsCollector
      */
     private $quoteCollectionFactory;
 
+    /**
+     * @var RushHour
+     */
+    private $rushHour;
+
     public function __construct(
         QuoteCollectionFactory $quoteCollectionFactory,
-        Config $config
+        Config $config,
+        RushHour $rushHour
     ) {
         $this->quoteCollectionFactory = $quoteCollectionFactory;
         $this->config                 = $config;
+        $this->rushHour               = $rushHour;
     }
 
     public function getResult(): Result
     {
-        $cartCount    = $this->getOpenCartCountFromLastHour();
-        $maxCartCount = $this->config->getOpenCarts();
-
+        $cartCount = $this->getOpenCartCountFromLastHour();
+        if ($this->rushHour->isRushHour()) {
+            $maxCartCount = $this->config->getMaxOpenCartsPerNormalRushHour();
+        } else {
+            $maxCartCount = $this->config->getMaxOpenCartsPerNormalHour();
+        }
         if ($cartCount > $maxCartCount) {
             $cartResult = new Result(
                 ResultInterface::STATUS_FAIL,
