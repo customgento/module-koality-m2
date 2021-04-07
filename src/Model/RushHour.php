@@ -39,6 +39,11 @@ class RushHour
         return $timeStamp > $beginRushHourTimestamp && $timeStamp < $endRushHourTimestamp;
     }
 
+    private function shouldAllowRushHour(): bool
+    {
+        return !($this->isWeekend() && !$this->config->doesRushHourHappenWeekends());
+    }
+
     private function isWeekend(): bool
     {
         $currentWeekDay = date('w');
@@ -46,8 +51,4 @@ class RushHour
         return ($currentWeekDay === 0 || $currentWeekDay === 6);
     }
 
-    public function shouldAllowRushHour(): bool
-    {
-        return !($this->isWeekend() && !$this->config->doesRushHourHappenWeekends());
-    }
 }
