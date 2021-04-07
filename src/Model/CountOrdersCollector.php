@@ -81,10 +81,7 @@ class CountOrdersCollector
      */
     private function getCurrentSalesThreshold(): ?int
     {
-        $currentWeekDay = date('w');
-        $isWeekend      = ($currentWeekDay === 0 || $currentWeekDay === 6);
-        $allowRushHour  = !($isWeekend && !$this->config->doesRushHourHappenWeekends());
-        if ($allowRushHour && $this->rushHour->isRushHour()) {
+        if ($this->rushHour->shouldAllowRushHour() && $this->rushHour->isRushHour()) {
             return (int)$this->config->getMinOrdersPerRushHour();
         }
 
