@@ -32,8 +32,11 @@ class RushHour
         $endRushHourTimeArray   = explode(',', $this->config->getRushHourEnd());
         $endRushHourTimestamp   = strtotime($endRushHourTimeArray[0] . ':' . $endRushHourTimeArray[1] . ':'
             . $endRushHourTimeArray[2]);
+        if ($this->shouldAllowRushHour()) {
+            return $timeStamp > $beginRushHourTimestamp && $timeStamp < $endRushHourTimestamp;
+        }
 
-        return $timeStamp > $beginRushHourTimestamp && $timeStamp < $endRushHourTimestamp;
+        return false;
     }
 
     private function isWeekend(): bool

@@ -81,7 +81,7 @@ class CountOrdersCollector
      */
     private function getCurrentSalesThreshold(): ?int
     {
-        if ($this->rushHour->shouldAllowRushHour() && $this->rushHour->isRushHour()) {
+        if ($this->rushHour->isRushHour()) {
             return (int)$this->config->getMinOrdersPerRushHour();
         }
 
