@@ -50,5 +50,4 @@ class RushHour
 
         return ($currentWeekDay === 0 || $currentWeekDay === 6);
     }
-
 }
