@@ -25,6 +25,9 @@ class RushHour
 
     public function isRushHour(): bool
     {
+        if (!$this->shouldAllowRushHour()) {
+            return false;
+        }
         $timeStamp              = $this->date->gmtTimestamp();
         $beginRushHourTimeArray = explode(',', $this->config->getRushHourBegin());
         $beginRushHourTimestamp = strtotime($beginRushHourTimeArray[0] . ':' . $beginRushHourTimeArray[1] . ':'
@@ -32,11 +35,8 @@ class RushHour
         $endRushHourTimeArray   = explode(',', $this->config->getRushHourEnd());
         $endRushHourTimestamp   = strtotime($endRushHourTimeArray[0] . ':' . $endRushHourTimeArray[1] . ':'
             . $endRushHourTimeArray[2]);
-        if ($this->shouldAllowRushHour()) {
-            return $timeStamp > $beginRushHourTimestamp && $timeStamp < $endRushHourTimestamp;
-        }
 
-        return false;
+        return $timeStamp > $beginRushHourTimestamp && $timeStamp < $endRushHourTimestamp;
     }
 
     private function isWeekend(): bool
