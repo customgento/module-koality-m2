@@ -59,7 +59,7 @@ class ConfigTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture current_store 'koality/orders_per_hour/min_orders_per_normal_hour 10
+     * @magentoConfigFixture current_store koality/orders_per_hour/min_orders_per_normal_hour 10
      */
     public function testMinOrdersPerHourNormal(): void
     {
@@ -77,7 +77,7 @@ class ConfigTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
-     * @magentoConfigFixture current_store koality/active_products/min_number 100
+     * @magentoConfigFixture current_store koality/active_products/min_active_products 100
      */
     public function testGetActiveProducts(): void
     {
