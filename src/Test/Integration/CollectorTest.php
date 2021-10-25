@@ -102,6 +102,8 @@ class CollectorTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
+     * @magentoConfigFixture current_store koality/rush_hour/begin 00,00,00
+     * @magentoConfigFixture current_store koality/rush_hour/end 00,00,00
      * @magentoConfigFixture current_store koality/open_carts/max_open_carts_per_normal_hour 10
      */
     public function testOpenCartCollectorReturnsTrueBasedOnMaxCartCount(): void
@@ -115,6 +117,8 @@ class CollectorTest extends TestCase
 
     /**
      * @magentoAppIsolation  enabled
+     * @magentoConfigFixture current_store koality/rush_hour/begin 00,00,00
+     * @magentoConfigFixture current_store koality/rush_hour/end 00,00,00
      * @magentoConfigFixture current_store koality/open_carts/max_open_carts_per_normal_hour -1
      */
     public function testOpenCartCollectorReturnsFalseBasedOnMaxCartCount(): void
