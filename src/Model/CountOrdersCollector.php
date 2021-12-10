@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Koality\MagentoPlugin\Model;
 
+use Koality\MagentoPlugin\Api\CollectorInterface;
 use Koality\MagentoPlugin\Api\ResultInterface;
 use Koality\MagentoPlugin\Model\Config;
 use Koality\MagentoPlugin\Model\Formatter\Result;
@@ -11,7 +12,7 @@ use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Koality\MagentoPlugin\Model\RushHour;
 
-class CountOrdersCollector
+class CountOrdersCollector implements CollectorInterface
 {
     /**
      * @var SearchCriteriaBuilder
@@ -45,7 +46,7 @@ class CountOrdersCollector
         $this->rushHour              = $rushHour;
     }
 
-    public function getResult(): ResultInterface
+    public function getResult(): Result
     {
         $salesThreshold     = $this->getCurrentSalesThreshold();
         $currentOrdersCount = $this->getLastHourOrderCount();

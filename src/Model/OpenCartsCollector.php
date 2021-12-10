@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Koality\MagentoPlugin\Model;
 
+use Koality\MagentoPlugin\Api\CollectorInterface;
 use Koality\MagentoPlugin\Api\ResultInterface;
 use Koality\MagentoPlugin\Model\Formatter\Result;
 use Koality\MagentoPlugin\Model\Config;
@@ -11,7 +12,7 @@ use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\ResourceModel\Quote\CollectionFactory as QuoteCollectionFactory;
 use Koality\MagentoPlugin\Model\RushHour;
 
-class OpenCartsCollector
+class OpenCartsCollector implements CollectorInterface
 {
     /**
      * @var Config

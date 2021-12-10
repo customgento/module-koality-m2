@@ -42,7 +42,7 @@ class CollectorContainer
         $formatter  = new KoalityFormatter();
         $collectors = [
             $this->countOrderCollector->getResult(),
-            $this->activeProductsCollector->getAllProducts(),
+            $this->activeProductsCollector->getResult(),
             $this->openCartsCollector->getResult()
         ];
 

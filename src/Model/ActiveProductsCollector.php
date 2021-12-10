@@ -10,8 +10,9 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Koality\MagentoPlugin\Model\Config;
+use Koality\MagentoPlugin\Api\CollectorInterface;
 
-class ActiveProductsCollector
+class ActiveProductsCollector implements CollectorInterface
 {
     /**
      * @var SearchCriteriaBuilder
@@ -38,7 +39,7 @@ class ActiveProductsCollector
         $this->config                = $config;
     }
 
-    public function getAllProducts(): ResultInterface
+    public function getResult(): Result
     {
         $activeProductCount       = $this->getActiveProductsCount();
         $minNumberOfActiveProduct = $this->config->getActiveProducts() ?? 0;
