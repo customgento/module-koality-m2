@@ -45,7 +45,7 @@ class CollectorTest extends TestCase
      */
     public function testActiveProductsCollectorReturnsSuccessBasedOnActiveProducts(): void
     {
-        $result = $this->activeProductsCollector->getAllProducts();
+        $result = $this->activeProductsCollector->getResult();
         self::assertEquals(
             ResultInterface::STATUS_PASS,
             $result->getStatus()
@@ -59,7 +59,7 @@ class CollectorTest extends TestCase
      */
     public function testActiveProductsCollectorReturnsErrorBasedOnActiveProducts(): void
     {
-        $result = $this->activeProductsCollector->getAllProducts();
+        $result = $this->activeProductsCollector->getResult();
         self::assertEquals(
             ResultInterface::STATUS_FAIL,
             $result->getStatus()
