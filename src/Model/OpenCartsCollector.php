@@ -76,7 +76,7 @@ class OpenCartsCollector implements CollectorInterface
         $fromTime        = date('Y-m-d H:i:s', strtotime('-1 hour'));
         $quoteCollection = $this->quoteCollectionFactory->create()
             ->addFieldToFilter(CartInterface::KEY_IS_ACTIVE, ['eq' => 1])
-            ->addFieldToFilter('created_at', ['from' => $fromTime, 'to' => $toTime]);
+            ->addFieldToFilter(CartInterface::KEY_CREATED_AT, ['from' => $fromTime, 'to' => $toTime]);
 
         return $quoteCollection->getSize();
     }

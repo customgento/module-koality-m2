@@ -17,7 +17,7 @@ interface ResultInterface
     public const TYPE_TIME_SERIES_PERCENT = 'time_series_percent';
 
     /**
-     * Return the results status. Can be fail or pass.
+     * Return the result's status. Can be fail or pass.
      *
      * Use the class constants for checking the status.
      *

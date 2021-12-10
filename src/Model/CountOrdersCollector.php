@@ -9,6 +9,7 @@ use Koality\MagentoPlugin\Api\ResultInterface;
 use Koality\MagentoPlugin\Model\Config;
 use Koality\MagentoPlugin\Model\Formatter\Result;
 use Magento\Framework\Api\SearchCriteriaBuilder;
+use Magento\Quote\Api\Data\CartInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Koality\MagentoPlugin\Model\RushHour;
 
@@ -99,8 +100,8 @@ class CountOrdersCollector implements CollectorInterface
         $orderTo        = date("Y-m-d H:i:s");
         $orderFrom      = date('Y-m-d H:i:s', strtotime('- 1 hour'));
         $searchCriteria = $this->searchCriteriaBuilder
-            ->addFilter('created_at', $orderFrom, 'gteq')
-            ->addFilter('created_at', $orderTo, 'lteq')->create();
+            ->addFilter(CartInterface::KEY_IS_ACTIVE, $orderFrom, 'gteq')
+            ->addFilter(CartInterface::KEY_IS_ACTIVE, $orderTo, 'lteq')->create();
 
         return $this->orderRepository->getList($searchCriteria)->getTotalCount();
     }
