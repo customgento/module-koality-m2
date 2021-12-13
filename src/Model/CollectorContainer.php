@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Koality\MagentoPlugin\Model;
 
+use Koality\MagentoPlugin\Api\CollectorInterface;
 use Koality\MagentoPlugin\Model\Formatter\KoalityFormatter;
 
 class CollectorContainer
@@ -22,7 +23,9 @@ class CollectorContainer
     {
         $formatter = new KoalityFormatter();
         foreach ($this->collectors as $collector) {
-            $formatter->addResult($collector->getResult());
+            if ($collector instanceof CollectorInterface) {
+                $formatter->addResult($collector->getResult());
+            }
         }
 
         return $formatter;

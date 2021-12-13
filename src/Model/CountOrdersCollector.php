@@ -97,7 +97,7 @@ class CountOrdersCollector implements CollectorInterface
      */
     private function getLastHourOrderCount(): int
     {
-        $orderTo        = date("Y-m-d H:i:s");
+        $orderTo        = date('Y-m-d H:i:s');
         $orderFrom      = date('Y-m-d H:i:s', strtotime('- 1 hour'));
         $searchCriteria = $this->searchCriteriaBuilder
             ->addFilter(CartInterface::KEY_CREATED_AT, $orderFrom, 'gteq')

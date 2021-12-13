@@ -72,7 +72,7 @@ class OpenCartsCollector implements CollectorInterface
 
     private function getOpenCartCountFromLastHour(): int
     {
-        $toTime          = date("Y-m-d H:i:s");
+        $toTime          = date('Y-m-d H:i:s');
         $fromTime        = date('Y-m-d H:i:s', strtotime('-1 hour'));
         $quoteCollection = $this->quoteCollectionFactory->create()
             ->addFieldToFilter(CartInterface::KEY_IS_ACTIVE, ['eq' => 1])
