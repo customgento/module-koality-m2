@@ -47,7 +47,7 @@ class CountOrdersCollector implements CollectorInterface
         $this->rushHour              = $rushHour;
     }
 
-    public function getResult(): Result
+    public function getResult(): ResultInterface
     {
         $salesThreshold     = $this->getCurrentSalesThreshold();
         $currentOrdersCount = $this->getLastHourOrderCount();

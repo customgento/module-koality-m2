@@ -39,7 +39,7 @@ class ActiveProductsCollector implements CollectorInterface
         $this->config                = $config;
     }
 
-    public function getResult(): Result
+    public function getResult(): ResultInterface
     {
         $activeProductCount       = $this->getActiveProductsCount();
         $minNumberOfActiveProduct = $this->config->getActiveProducts() ?? 0;

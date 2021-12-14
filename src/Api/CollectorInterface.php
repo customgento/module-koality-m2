@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Koality\MagentoPlugin\Api;
 
-use Koality\MagentoPlugin\Model\Formatter\Result;
+use Koality\MagentoPlugin\Api\ResultInterface;
 
 /**
  * Collection interface.
@@ -16,7 +16,7 @@ interface CollectorInterface
     /**
      * Return a health check result for a single criteria.
      *
-     * @return Result
+     * @return ResultInterface
      */
-    public function getResult(): Result;
+    public function getResult(): ResultInterface;
 }

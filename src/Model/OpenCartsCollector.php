@@ -39,7 +39,7 @@ class OpenCartsCollector implements CollectorInterface
         $this->rushHour               = $rushHour;
     }
 
-    public function getResult(): Result
+    public function getResult(): ResultInterface
     {
         $cartCount = $this->getOpenCartCountFromLastHour();
         if ($this->rushHour->isRushHour()) {
