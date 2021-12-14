@@ -97,7 +97,7 @@ class KoalityFormatter
             $check['limit'] = $result->getLimit();
         }
 
-        if ($result->getLimitType() !== null) {
+        if ($result->getLimitType()) {
             $check['limitType'] = $result->getLimitType();
         }
 
@@ -105,15 +105,15 @@ class KoalityFormatter
             $check['observedValue'] = $result->getObservedValue();
         }
 
-        if ($result->getObservedValueUnit() !== null) {
+        if ($result->getObservedValueUnit()) {
             $check['observedUnit'] = $result->getObservedValueUnit();
         }
 
-        if ($result->getObservedValuePrecision() !== null) {
+        if ($result->getObservedValuePrecision()) {
             $check['observedValuePrecision'] = $result->getObservedValuePrecision();
         }
 
-        if ($result->getType() !== null) {
+        if ($result->getType()) {
             $check['metricType'] = $result->getType();
         }
 

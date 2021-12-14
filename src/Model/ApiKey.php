@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 namespace Koality\MagentoPlugin\Model;
 
+use Exception;
+
 class ApiKey
 {
+    /**
+     * @throws Exception
+     */
     public function createRandomApiKey(): string
     {
         return sprintf(

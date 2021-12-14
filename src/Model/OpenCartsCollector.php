@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Koality\MagentoPlugin\Model;
 
+use Koality\MagentoPlugin\Api\CollectorInterface;
 use Koality\MagentoPlugin\Api\ResultInterface;
 use Koality\MagentoPlugin\Model\Formatter\Result;
 use Koality\MagentoPlugin\Model\Config;
@@ -11,7 +12,7 @@ use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\ResourceModel\Quote\CollectionFactory as QuoteCollectionFactory;
 use Koality\MagentoPlugin\Model\RushHour;
 
-class OpenCartsCollector
+class OpenCartsCollector implements CollectorInterface
 {
     /**
      * @var Config
@@ -38,7 +39,7 @@ class OpenCartsCollector
         $this->rushHour               = $rushHour;
     }
 
-    public function getResult(): Result
+    public function getResult(): ResultInterface
     {
         $cartCount = $this->getOpenCartCountFromLastHour();
         if ($this->rushHour->isRushHour()) {
@@ -71,11 +72,11 @@ class OpenCartsCollector
 
     private function getOpenCartCountFromLastHour(): int
     {
-        $toTime          = date("Y-m-d H:i:s");
+        $toTime          = date('Y-m-d H:i:s');
         $fromTime        = date('Y-m-d H:i:s', strtotime('-1 hour'));
         $quoteCollection = $this->quoteCollectionFactory->create()
             ->addFieldToFilter(CartInterface::KEY_IS_ACTIVE, ['eq' => 1])
-            ->addFieldToFilter('created_at', ['from' => $fromTime, 'to' => $toTime]);
+            ->addFieldToFilter(CartInterface::KEY_CREATED_AT, ['from' => $fromTime, 'to' => $toTime]);
 
         return $quoteCollection->getSize();
     }
