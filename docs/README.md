@@ -1,7 +1,6 @@
 # koality.io Magento 2 Plugin
+koality.io Magento 2 Plugin can be used to continuously monitor a Magento 2 shop for business metrics. To use this plugin, an active koality.io account is required. After the initial setup, the shop can be monitored easily directly in the koality.io admin area.
 
-## Description
-This plugin can be used to continuously monitor a Magento 2 shop for business metrics.
 
 ## Layout in koality.io backend
 ![Active products](images/active_products.png "Active products")
