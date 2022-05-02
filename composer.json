@@ -2,7 +2,7 @@
   "name": "customgento/module-koality-m2",
   "description": "koality.io Magento 2 Plugin can be used to continuously monitor a Magento 2 shop for business metrics.",
   "type": "magento2-module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "OSL-3.0",
   "authors": [
     {
@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-      "php": "~7.3.0||~7.4.0",
+      "php": "~7.3||~7.4||~8.1",
       "magento/framework": "~102.0||~103.0",
       "magento/module-backend": "~101.0||~102.0",
       "magento/module-catalog": "~103.0||~104.0",
