@@ -118,3 +118,4 @@ jobs:
           module_name: Koality_MagentoPlugin
           composer_name: customgento/module-koality-m2
           ce_version: '2.4.4'
+          composer_version: '2'
