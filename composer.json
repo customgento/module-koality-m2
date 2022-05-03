@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-      "php": "~7.3||~7.4||~8.1",
+      "php": "~7.3.0||~7.4.0||~8.1.0",
       "magento/framework": "~102.0||~103.0",
       "magento/module-backend": "~101.0||~102.0",
       "magento/module-catalog": "~103.0||~104.0",
